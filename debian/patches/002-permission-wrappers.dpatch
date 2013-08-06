@@ -1,0 +1,51 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 002-permission-wrappers.dpatch by  <walterk@pbuilder3.cpt2.host-h.net>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vadduser-wrapper vmailmgr/commands/vadduser-wrapper
+--- vmailmgr~/commands/vadduser-wrapper	1970-01-01 02:00:00.000000000 +0200
++++ vmailmgr/commands/vadduser-wrapper	2012-05-22 12:10:32.000000000 +0200
+@@ -0,0 +1,6 @@
++#!/bin/sh
++vadduser-real $@
++chmod 640 /usr/home/$USER/passwd.cdb
++chmod 710 /usr/home/$USER
++sudo vmakegrpmail $USER
++
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vdeluser-wrapper vmailmgr/commands/vdeluser-wrapper
+--- vmailmgr~/commands/vdeluser-wrapper	1970-01-01 02:00:00.000000000 +0200
++++ vmailmgr/commands/vdeluser-wrapper	2012-05-22 12:10:49.000000000 +0200
+@@ -0,0 +1,6 @@
++#!/bin/sh
++vdeluser-real $@
++chmod 640 /usr/home/$USER/passwd.cdb
++chmod 710 /usr/home/$USER
++sudo vmakegrpmail $USER
++
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vmakegrpmail vmailmgr/commands/vmakegrpmail
+--- vmailmgr~/commands/vmakegrpmail	1970-01-01 02:00:00.000000000 +0200
++++ vmailmgr/commands/vmakegrpmail	2012-05-22 12:11:19.000000000 +0200
+@@ -0,0 +1,10 @@
++#!/bin/sh
++
++if id $1;then
++  chgrp mail "/usr/home/$1"
++  chgrp mail "/usr/home/$1/passwd.cdb"
++else
++  echo "User not found on this server"
++  exit 1
++fi
++
+diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vpasswd-wrapper vmailmgr/commands/vpasswd-wrapper
+--- vmailmgr~/commands/vpasswd-wrapper	1970-01-01 02:00:00.000000000 +0200
++++ vmailmgr/commands/vpasswd-wrapper	2012-05-22 12:11:37.000000000 +0200
+@@ -0,0 +1,6 @@
++#!/bin/sh
++vpasswd-real $@
++chmod 640 /usr/home/$USER/passwd.cdb
++chmod 710 /usr/home/$USER
++sudo vmakegrpmail $USER
++

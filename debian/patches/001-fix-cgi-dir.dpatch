@@ -1,0 +1,31 @@
+#! /bin/sh /usr/share/dpatch/dpatch-run
+## 001-fix-cgi-dir.dpatch by Sheldon Hearn <sheldon.hearn@hetzner.co.za>
+##
+## All lines beginning with `## DP:' are a description of the patch.
+## DP: No description.
+
+@DPATCH@
+diff -urNad vmailmgr-0.97~/configure vmailmgr-0.97/configure
+--- vmailmgr-0.97~/configure	2005-09-04 06:26:50.000000000 +0200
++++ vmailmgr-0.97/configure	2010-03-15 10:23:49.000000000 +0200
+@@ -5570,7 +5570,7 @@
+ done
+ 
+ 
+-cgidir='${prefix}/cgi-bin'
++cgidir='${prefix}/lib/cgi-bin'
+ 
+ 
+                                                                                                                                                                                                                   ac_config_files="$ac_config_files Makefile cgi/Makefile authenticate/Makefile commands/Makefile daemon/Makefile doc/Makefile lib/Makefile lib/cdb++/Makefile lib/cgi/Makefile lib/cli++/Makefile lib/config/Makefile lib/courier-authlib/Makefile lib/fdbuf/Makefile lib/misc/Makefile lib/mystring/Makefile lib/vdomain/Makefile lib/vpwentry/Makefile lib/vpwtable/Makefile scripts/Makefile php/Makefile python/Makefile"
+diff -urNad vmailmgr-0.97~/configure.in vmailmgr-0.97/configure.in
+--- vmailmgr-0.97~/configure.in	2002-11-20 17:54:41.000000000 +0200
++++ vmailmgr-0.97/configure.in	2010-03-15 10:23:05.000000000 +0200
+@@ -113,7 +113,7 @@
+ AC_CHECK_FUNCS(gethostname gettimeofday mkdir putenv rmdir socket)
+ AC_CHECK_FUNCS(srandom random crypt)
+ 
+-cgidir='${prefix}/cgi-bin'
++cgidir='${prefix}/lib/cgi-bin'
+ AC_SUBST(cgidir)
+ 
+ AC_OUTPUT(Makefile

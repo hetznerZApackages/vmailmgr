@@ -1,0 +1,96 @@
+vmailmgr (1:0.96.8-1+hetz5) wheezy-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz5~exp1 as 1:0.96.8-1+hetz5
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 06 Aug 2013 15:28:35 +0200
+
+vmailmgr (1:0.96.8-1+hetz5~exp1) wheezy-hetz; urgency=low
+
+  * Version bump
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 06 Aug 2013 15:23:21 +0200
+
+vmailmgr (1:0.96.8-1+hetz4) wheezy-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz4~exp4 as 1:0.96.8-1+hetz4
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 06 Aug 2013 15:22:54 +0200
+
+vmailmgr (1:0.96.8-1+hetz4~exp4) wheezy-hetz; urgency=low
+
+  * Releasing for Wheezy
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 06 Aug 2013 15:06:19 +0200
+
+vmailmgr (1:0.96.8-1+hetz4) wheezy-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz4~exp3 as 1:0.96.8-1+hetz4
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 06 Aug 2013 15:06:19 +0200
+
+vmailmgr (1:0.96.8-1+hetz4~exp3) squeeze-hetz-experimental; urgency=low
+
+  * Add username check for vmakegrpmail
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Tue, 22 May 2012 12:12:00 +0200
+
+vmailmgr (1:0.96.8-1+hetz4~exp2) squeeze-hetz-experimental; urgency=low
+
+  * Fix vulnerability in vmakegrpmail
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Tue, 22 May 2012 12:12:00 +0200
+
+vmailmgr (1:0.96.8-1+hetz3) squeeze-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz3~exp1 as 1:0.96.8-1+hetz3
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Tue, 22 May 2012 09:51:25 +0200
+
+vmailmgr (1:0.96.8-1+hetz3~exp1) squeeze-hetz-experimental; urgency=low
+
+  * Build for Squeeze 
+
+ -- Geoff Robertson <geoff.robertson@hetzner.co.za>  Fri, 13 Jan 2012 10:26:41 +0200
+
+vmailmgr (1:0.96.8-1+hetz2) lenny-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz2~exp3 as 1:0.96.8-1+hetz2
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Tue, 04 May 2010 15:40:40 +0200
+
+vmailmgr (1:0.96.8-1+hetz2~exp3) lenny-hetz-experimental; urgency=low
+
+  * Ensure group readability on passwd.cdb writes.
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Tue, 04 May 2010 15:26:46 +0200
+
+vmailmgr (1:0.96.8-1+hetz2~exp2) lenny-hetz-experimental; urgency=low
+
+  * setgid() to the mail group in saved_state::saved_state().
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Tue, 04 May 2010 15:07:29 +0200
+
+vmailmgr (1:0.96.8-1+hetz2~exp1) lenny-hetz-experimental; urgency=low
+
+  * setgid() to the mail group, not the domain user's group
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Wed, 28 Apr 2010 11:09:19 +0200
+
+vmailmgr (1:0.96.8-1+hetz1) lenny-hetz; urgency=low
+
+  * Released 1:0.96.8-1+hetz1~exp2 as 1:0.96.8-1+hetz1
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Mon, 19 Apr 2010 13:09:44 +0200
+
+vmailmgr (1:0.96.8-1+hetz1~exp2) lenny-hetz-experimental; urgency=low
+
+  * Move wrapped commands to correct location
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Mon, 19 Apr 2010 12:52:53 +0200
+
+vmailmgr (1:0.96.8-1+hetz1~exp1) lenny-hetz-experimental; urgency=low
+
+  * Initial release
+
+ -- Sheldon Hearn <sheldon.hearn@hetzner.co.za>  Mon, 15 Mar 2010 10:05:17 +0200
+

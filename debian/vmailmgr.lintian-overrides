@@ -1,0 +1,5 @@
+# The below overrides are done to allow symlinks to /usr/bin in /usr/local/bin
+# Actual binaries are moved out already. Links should be removed as rest of code is updated.
+vmailmgr binary: dir-in-usr-local
+vmailmgr binary: file-in-usr-local
+vmailmgr binary: file-in-unusual-dir
