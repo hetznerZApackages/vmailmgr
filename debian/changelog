@@ -1,8 +1,8 @@
-vmailmgr (1:0.96.8-1+hetz6~exp1) jessie-hetz-experimental; urgency=low
+vmailmgr (1:0.96.8-1+hetz6~exp2) jessie-hetz-experimental; urgency=low
 
-  * Released 1:0.96.8-1+hetz5~exp1 as 1:0.96.8-1+hetz5
+  * Forward port from wheezy
 
- -- Shaun Bugler - Hetzner (Pty) Ltd <sb@hetzner.co.za>  Wed, 06 Jan 2016 10:06:32 +0200
+ -- Shaun Bugler - Hetzner (Pty) Ltd <sb@hetzner.co.za>  Wed, 06 Jan 2016 10:12:52 +0200
 
 vmailmgr (1:0.96.8-1+hetz5~exp1) wheezy-hetz; urgency=low
 
