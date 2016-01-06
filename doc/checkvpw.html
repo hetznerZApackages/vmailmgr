@@ -1,0 +1,125 @@
+<HTML>
+<HEAD>
+<TITLE>checkvpw - check passwords for virtual and non-virtual users</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+<!--
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#RETURN_VALUE">RETURN VALUE</A>
+	<LI><A HREF="#ENVIRONMENT">ENVIRONMENT</A>
+	<LI><A HREF="#SEE_ALSO">SEE ALSO</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+-->
+<!-- INDEX END -->
+
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+checkvpw - check passwords for virtual and non-virtual users
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+<STRONG>checkvpw</STRONG>  <STRONG>subprogram</STRONG> [<STRONG>arguments...</STRONG>]
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+This program is a drop-in replacement for the standard checkpassword,
+written by D. J. Bernstein (<A
+HREF="mailto:djb@pobox.com">djb@pobox.com</A>) In the absence of virtual
+hosting (determined by the use of
+<EM>/var/qmail/control/virtualdomainss</EM> and IP aliases), it behaves identically to checkpassword. When virtual
+hosting is used, it permits logins from a unique set of users for each of
+the aliases.
+
+<P>
+<EM>checkvpw</EM> must be run from either the <EM>tcp-env</EM> program (part of the <EM>qmail</EM>
+package) or from a suitable substitute, such as <EM>tcpserver</EM>
+(part of the <EM>ucspi-tcp</EM> package). These packages are used to determine to which address a remote
+host is connecting.
+<EM>checkvpw</EM> must also be passed the checkpassword-compatible authentication data on
+file descriptor three. This can be accomplished by running it from a tool
+such as
+<EM>qmail-popup</EM>.
+
+<P>
+<EM>checkvpw</EM> accepts a command line in the following format:
+
+<P>
+<PRE>        checkvpw [subprogram] [arguments...]
+</PRE>
+<P>
+If the authentication information is valid, the subprogram is run,
+otherwise <EM>checkvpw</EM> returns an error to the program that invokes it.
+
+<P>
+If the user name contains the character <CODE>@</CODE>, the host name reported by <EM>tcp-env</EM> is replaced by the string following the
+<CODE>@</CODE>, and the user name is replaced by the string preceding the
+<CODE>@</CODE>. If the local host name reported by <EM>tcp-env</EM> matches one of those in <EM>/var/qmail/control/virtualdomains</EM>, <EM>checkvpw</EM> prepends the
+<EM>prepend</EM> string associated with the host name to the given user name. Wildcards in <EM>virtualdomains</EM> are permitted and are handled in the same way <EM>qmail</EM> handles them (see <EM>qmail-send</EM>). For example, if the line <CODE>.bar.com:bar</CODE> appears in the virtual hosts file, it matches <CODE>one.two.bar.com</CODE> but not <CODE>bar.com</CODE>.
+
+<P>
+If the user name resulting from the above step appears in the system
+password file (typically <EM>/etc/passwd</EM>), the user is treated as a local user and authenticated with the
+information from that file. If this authentication succeeds, the mail
+directory is set to the subdirectory named on the command line. If the user
+name does not appear in the system password file and is of the form <CODE>name-ext</CODE> where <CODE>name</CODE> does appear in the password file, the user is treated as a ``virtual'' user
+and authenticated with the information from a file named <EM>passwd</EM> in the user's home directory. If this authentication succeeds, the mail
+directory is set to the subdirectory <EM>users/ext/</EM> in the user's home directory, where
+<CODE>ext</CODE> is from the above step.
+
+<P>
+<EM>checkvpw</EM> also does some rewriting on the arguments of the subprogram. Any argument
+matching the string ``<CODE>maildir</CODE>'' (ignoring case) is replaced with the full path of the mail directory, as
+determined by the steps above.
+
+<P>
+This program may be invoked in combination with <EM>qmail-popup</EM> and
+<EM>qmail-pop3d</EM> from inetd by placing the following line in the
+<EM>/etc/inetd.conf</EM> configuration file (all one line):
+
+<P>
+<PRE>        pop-3 stream tcp nowait root /var/qmail/bin/tcp-env tcp-env -R /var/qmail/bin/qmail-popup &lt;hostname&gt; /usr/bin/checkvpw /var/qmail/bin/qmail-pop3d Maildir/
+</PRE>
+<P>
+<HR>
+<H1><A NAME="RETURN_VALUE">RETURN VALUE</A></H1>
+<P>
+0 if the user is successfully authenticated, nonzero if any error occurred.
+Exit code 1 indicates that a bad password was given, 2 indicates that the
+program was used incorrectly, and 111 indicates a temporary failure.
+
+<P>
+<HR>
+<H1><A NAME="ENVIRONMENT">ENVIRONMENT</A></H1>
+<P>
+<EM>checkvpw</EM> requires that <CODE>TCPLOCALHOST</CODE> be set to the host name of the local address of the connection.
+
+<P>
+<HR>
+<H1><A NAME="SEE_ALSO">SEE ALSO</A></H1>
+<P>
+<CODE>vdeliver(1)</CODE>
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+Bruce Guenter &lt;<EM>bruceg@em.ca</EM>&gt;.
+
+</BODY>
+
+</HTML>

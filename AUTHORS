@@ -1,0 +1,27 @@
+Written by Bruce Guenter <bruceg@em.ca>
+
+Dan Kuykendall <dan@kuykendall.org> extended the FAQ and HOWTO and
+converted them to SGML.
+
+Mike Bell <mike@mikebell.org> has contributed the current PHP module
+and several patches.
+
+The CDB library was originally written by D.J.Bernstein <djb@pobox.com>.
+I have subsequently rewritten parts of it to better fit into C++ style
+accesses.  The only copyright notice I could find in the original
+package says:
+
+	If you want to incorporate cdb into your own packages, you can
+	just copy the code here.
+
+The MD5 Message-Digest Algorithm library was written by Ulrich Drepper
+<drepper@gnu.ai.mit.edu>, 1995, and was taken from the GNU C Library
+
+Kerberos5 support written by Nickolai Zeldovich <kolya@zepa.net>
+
+Anil Madhavapeddy <anil@recoil.org> has contributed a makefile /
+configure.in patch.
+
+Eugene Miretskiy <eugene@invision.net> contributed the original quota
+checking program, vcheckquota.
+

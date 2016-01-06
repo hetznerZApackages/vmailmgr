@@ -1,0 +1,81 @@
+<HTML>
+<HEAD>
+<TITLE>vrehash - reorganize users directory</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+<!--
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#RETURN_VALUE">RETURN VALUE</A>
+	<LI><A HREF="#NOTES">NOTES</A>
+	<LI><A HREF="#WARNINGS">WARNINGS</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+-->
+<!-- INDEX END -->
+
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+vrehash - reorganize users directory
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+<STRONG>vrehash</STRONG>
+
+
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+This program is designed to be run after the sysadmin has changed the
+<CODE>user-dir-bits</CODE> or <CODE>user-dir-slices</CODE> configuration variables. It creates a new users directory called <CODE>new.users</CODE>, where <CODE>users</CODE>
+is the configured name of the user directory. It then traverses the
+password table, creates a new user directory name for each user, and moves
+the user's mail directory to the new directory name, creating any necessary
+directories as it goes. Any alias entries in the password table are copied
+as-is.
+
+<P>
+<HR>
+<H1><A NAME="RETURN_VALUE">RETURN VALUE</A></H1>
+<P>
+Returns 1 if any part of the process fails; 0 otherwise.
+
+<P>
+<HR>
+<H1><A NAME="NOTES">NOTES</A></H1>
+<P>
+When the process is completed, a the old users directory will have been
+moved to <CODE>backup.users</CODE>. If no errors occurred, you should be able to safely delete this directory
+and all its subdirectories. Check this directory first, though, to ensure
+that no important files remain.
+
+<P>
+<HR>
+<H1><A NAME="WARNINGS">WARNINGS</A></H1>
+<P>
+This program is not particularly careful to clean up after itself if an
+error occurs. If an error occurs, you will have to check the status of the
+current directory, the virtual password file, and all the virtual users
+subdirectories in both <CODE>users</CODE> and <CODE>new.users</CODE>.
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+Bruce Guenter &lt;<A HREF="mailto:bruceg@em.ca">bruceg@em.ca</A>&gt;
+</BODY>
+
+</HTML>

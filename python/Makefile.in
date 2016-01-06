@@ -1,0 +1,267 @@
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+CC = @CC@
+CXX = @CXX@
+HTML2TXT = @HTML2TXT@
+LN = @LN@
+LYNX = @LYNX@
+MAKEINFO = @MAKEINFO@
+MKDIR = @MKDIR@
+PACKAGE = @PACKAGE@
+PYTHON = @PYTHON@
+RANLIB = @RANLIB@
+RM = @RM@
+STRIP = @STRIP@
+VERSION = @VERSION@
+W3M = @W3M@
+cgidir = @cgidir@
+phpdir = @phpdir@
+pythonlibdir = @pythonlibdir@
+
+cgi_SCRIPTS = vautoresponse vcommand
+pythonlib_DATA = vmailmgr.py vmailmgr.pyc vmailmgr.pyo 	vmailmgr_cgi.py vmailmgr_cgi.pyc vmailmgr_cgi.pyo
+
+EXTRA_DIST = vautoresponse.in vcommand.in vmailmgr.py.in vmailmgr_cgi.py.in 	vautoresponse.html vautoresponse-error.html vautoresponse-success.html
+
+CLEANFILES = $(cgi_SCRIPTS) $(pythonlib_DATA)
+
+SUFFIXES = .py .pyc .pyo .in .py.in
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../config.h
+CONFIG_CLEAN_FILES = 
+SCRIPTS =  $(cgi_SCRIPTS)
+
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DATA =  $(pythonlib_DATA)
+
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .in .py .py.in .pyc .pyo
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps python/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+install-cgiSCRIPTS: $(cgi_SCRIPTS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(cgidir)
+	@list='$(cgi_SCRIPTS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo " $(INSTALL_SCRIPT) $$p $(DESTDIR)$(cgidir)/`echo $$p|sed '$(transform)'`"; \
+	    $(INSTALL_SCRIPT) $$p $(DESTDIR)$(cgidir)/`echo $$p|sed '$(transform)'`; \
+	  else if test -f $(srcdir)/$$p; then \
+	    echo " $(INSTALL_SCRIPT) $(srcdir)/$$p $(DESTDIR)$(cgidir)/`echo $$p|sed '$(transform)'`"; \
+	    $(INSTALL_SCRIPT) $(srcdir)/$$p $(DESTDIR)$(cgidir)/`echo $$p|sed '$(transform)'`; \
+	  else :; fi; fi; \
+	done
+
+uninstall-cgiSCRIPTS:
+	@$(NORMAL_UNINSTALL)
+	list='$(cgi_SCRIPTS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(cgidir)/`echo $$p|sed '$(transform)'`; \
+	done
+
+install-pythonlibDATA: $(pythonlib_DATA)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(pythonlibdir)
+	@list='$(pythonlib_DATA)'; for p in $$list; do \
+	  if test -f $(srcdir)/$$p; then \
+	    echo " $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(pythonlibdir)/$$p"; \
+	    $(INSTALL_DATA) $(srcdir)/$$p $(DESTDIR)$(pythonlibdir)/$$p; \
+	  else if test -f $$p; then \
+	    echo " $(INSTALL_DATA) $$p $(DESTDIR)$(pythonlibdir)/$$p"; \
+	    $(INSTALL_DATA) $$p $(DESTDIR)$(pythonlibdir)/$$p; \
+	  fi; fi; \
+	done
+
+uninstall-pythonlibDATA:
+	@$(NORMAL_UNINSTALL)
+	list='$(pythonlib_DATA)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(pythonlibdir)/$$p; \
+	done
+tags: TAGS
+TAGS:
+
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = python
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am:
+install-exec: install-exec-am
+
+install-data-am: install-cgiSCRIPTS install-pythonlibDATA
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-cgiSCRIPTS uninstall-pythonlibDATA
+uninstall: uninstall-am
+all-am: Makefile $(SCRIPTS) $(DATA)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(cgidir) $(DESTDIR)$(pythonlibdir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-generic clean-am
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-generic distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: uninstall-cgiSCRIPTS install-cgiSCRIPTS uninstall-pythonlibDATA \
+install-pythonlibDATA tags distdir info-am info dvi-am dvi check \
+check-am installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+
+vautoresponse: vautoresponse.in Makefile
+	sed <$< >$@ \
+		-e "s|%PYTHON%|${PYTHON}|"  \
+		-e "s|%SYSCONFDIR%|${sysconfdir}/vmailmgr|"
+	chmod +x $@
+
+vcommand: vcommand.in Makefile
+	sed <$< >$@ \
+		-e "s|%PYTHON%|${PYTHON}|"  \
+		-e "s|%SYSCONFDIR%|${sysconfdir}/vmailmgr|"
+	chmod +x $@
+
+vmailmgr.py: vmailmgr.py.in Makefile
+	sed <$< >$@ \
+		-e "s|%PYTHON%|${PYTHON}|"  \
+		-e "s|%SYSCONFDIR%|${sysconfdir}/vmailmgr|"
+	chmod +x $@
+
+vmailmgr_cgi.py: vmailmgr_cgi.py.in Makefile
+	sed <$< >$@ \
+		-e "s|%PYTHON%|${PYTHON}|"  \
+		-e "s|%SYSCONFDIR%|${sysconfdir}/vmailmgr|"
+	chmod +x $@
+
+.py.pyc:
+	python -c 'import $*'
+.py.pyo:
+	python -O -c 'import $*'
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

@@ -1,0 +1,82 @@
+<HTML>
+<HEAD>
+<TITLE>vdeluser - delete a virtual user</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+<!--
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#NOTES">NOTES</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+-->
+<!-- INDEX END -->
+
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+vdeluser - delete a virtual user
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+<STRONG>vdeluser</STRONG>  <STRONG>username</STRONG> [<STRONG>username</STRONG> ...]
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+This program will take the steps necessary to remove a user from a virtual
+domain.
+
+<P>
+For each user listed on the command line, it does the following:
+
+<OL>
+<LI>
+<P>
+It removes the named user's entry from the local password file.
+
+<LI>
+<P>
+It removes any qmail delivery files that point to the named user's mail
+directory.
+
+<LI>
+<P>
+It removes the user's mail directory and all of its contents (recursively).
+
+</OL>
+<P>
+If any of the above steps fail, a warning is issued and processing
+continues.
+
+<P>
+<HR>
+<H1><A NAME="NOTES">NOTES</A></H1>
+<P>
+You must have either created the users subdirectory by hand or run the
+<EM>vsetup</EM> program before using this program.
+
+<P>
+This program expects the environment variable <CODE>HOME</CODE> to be set, and executes a change directory to the contents of it before
+starting. It is also required that you change user to the domain owner
+before using these utilities.
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+Bruce Guenter &lt;<EM>bruceg@em.ca</EM>&gt;.
+</BODY>
+
+</HTML>

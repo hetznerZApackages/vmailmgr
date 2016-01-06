@@ -1,0 +1,104 @@
+<HTML>
+<HEAD>
+<TITLE>vdeliver - deliver an e-mail message via vmailmgr</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+<!--
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#OPTIONS">OPTIONS</A>
+	<LI><A HREF="#RETURN_VALUE">RETURN VALUE</A>
+	<LI><A HREF="#ENVIRONMENT">ENVIRONMENT</A>
+	<LI><A HREF="#SEE_ALSO">SEE ALSO</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+-->
+<!-- INDEX END -->
+
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+vdeliver - deliver an e-mail message via vmailmgr
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+<STRONG>vdeliver</STRONG> [<STRONG>-dfrDFR</STRONG>]
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+vdeliver is the unified e-mail message delivery agent for virtual domains
+managed by vmailmgr. It is run from the <EM>.qmail-default</EM> file, and automatically handles delivery to any user within a virtual
+domain.
+
+<P>
+<HR>
+<H1><A NAME="OPTIONS">OPTIONS</A></H1>
+<DL>
+<DT><STRONG><A NAME="item__d">-d</A></STRONG><DD>
+<P>
+Do not add the <CODE>Delivered-To:</CODE> line to the top of the message.
+
+<DT><STRONG><A NAME="item__f">-f</A></STRONG><DD>
+<P>
+(default) Do not add the <CODE>From</CODE> mailbox line to the top of the message. Note that this line is never added
+when the message is being re-injected into the mail stream.
+
+<DT><STRONG><A NAME="item__r">-r</A></STRONG><DD>
+<P>
+Do not add the <CODE>Return-Path:</CODE> line to the top of the message.
+
+<DT><STRONG><A NAME="item__D">-D</A></STRONG><DD>
+<P>
+(default) Add the <CODE>Delivered-To:</CODE> line to the top of the message.
+
+<DT><STRONG><A NAME="item__F">-F</A></STRONG><DD>
+<P>
+Add the <CODE>From</CODE> mailbox line to the top of the message.
+
+<DT><STRONG><A NAME="item__R">-R</A></STRONG><DD>
+<P>
+(default) Add the <CODE>Return-Path:</CODE> line to the top of the message.
+
+</DL>
+<P>
+<HR>
+<H1><A NAME="RETURN_VALUE">RETURN VALUE</A></H1>
+<P>
+Returns 0 if delivery was successful, 100 if a fatal error occurred, or 111
+if a temporary error occurred.
+
+<P>
+<HR>
+<H1><A NAME="ENVIRONMENT">ENVIRONMENT</A></H1>
+<P>
+<EM>vdeliver</EM> expects to be run by <EM>qmail-local</EM> as it requires several of the environment variables that it sets. See the <EM>qmail-command</EM>(8) manual page for full details on these variables. In particular, it
+requires <CODE>DTLINE</CODE>, <CODE>EXT</CODE>, <CODE>HOST</CODE>, <CODE>RPLINE</CODE>,
+<CODE>SENDER</CODE>, <CODE>UFLINE</CODE>, and <CODE>USER</CODE>.
+
+<P>
+<HR>
+<H1><A NAME="SEE_ALSO">SEE ALSO</A></H1>
+<P>
+<CODE>checkvpw(1),</CODE> <EM>qmail-command</EM>(8)
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+Bruce Guenter &lt;<EM>bruceg@em.ca</EM>&gt;.
+
+</BODY>
+
+</HTML>
