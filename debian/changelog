@@ -1,3 +1,9 @@
+vmailmgr (1:0.96.9-1+hetz1~exp1) jessie-hetz-experimental; urgency=low
+
+  * Forward port from wheezy
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Thu, 04 Jul 2017 14:00:55 +0200
+
 vmailmgr (1:0.96.8-1+hetz6~exp5) jessie-hetz-experimental; urgency=low
 
   * Forward port from wheezy

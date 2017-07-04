@@ -1,14 +1,14 @@
 Source: vmailmgr
 Section: mail
 Priority: extra
-Maintainer: Sheldon Hearn <sheldon.hearn@hetzner.co.za>
-Build-Depends: dpatch, debhelper (>= 7), autotools-dev, ghostscript, python, transfig, w3m
+Maintainer: The Kerneles <thekernels@hetzner.co.za>
+Build-Depends: dpatch, debhelper (>= 7), autotools-dev, ghostscript, transfig, w3m
 Standards-Version: 3.7.3
 Homepage: http://untroubled.org/vmailmgr/
 
 Package: vmailmgr
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, python, socat
+Depends: ${shlibs:Depends}, ${misc:Depends}, socat
 Conflicts: vmailmgr-ha
 Replaces: vmailmgr-ha
 Description: Simple virtualizing POP3 password interface
