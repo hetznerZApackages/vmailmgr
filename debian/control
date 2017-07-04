@@ -1,8 +1,8 @@
 Source: vmailmgr
 Section: mail
 Priority: extra
-Maintainer: The Kerneles <thekernels@hetzner.co.za>
-Build-Depends: dpatch, debhelper (>= 7), autotools-dev, ghostscript, transfig, w3m
+Maintainer: The Kernels <thekernels@hetzner.co.za>
+Build-Depends: dpatch, debhelper (>= 7), autotools-dev, ghostscript, transfig, w3m, python
 Standards-Version: 3.7.3
 Homepage: http://untroubled.org/vmailmgr/
 
