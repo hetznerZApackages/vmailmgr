@@ -59,7 +59,7 @@ pythonlibdir="$local_cv_python_lib_dir"
 AC_SUBST(pythonlibdir)
 AM_CONDITIONAL(WANTPYTHON, test x$local_cv_python_lib_dir != x)
 
-phpdir="/home/httpd/php"
+phpdir="/usr/www/httpd/php"
 AC_SUBST(phpdir)
 
 AC_PATH_PROG(W3M, w3m)

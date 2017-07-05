@@ -74,9 +74,9 @@ do
 	mkdir -p $RPM_BUILD_ROOT/$dir
 done
 make	prefix=$RPM_BUILD_ROOT/usr \
-	cgidir=$RPM_BUILD_ROOT/home/httpd/cgi-bin \
+	cgidir=$RPM_BUILD_ROOT/usr/www/httpd/cgi-bin \
 	pythonlibdir=$RPM_BUILD_ROOT/usr/lib/python1.5 \
-	phpdir=$RPM_BUILD_ROOT/home/httpd/php \
+	phpdir=$RPM_BUILD_ROOT/usr/www/httpd/php \
 	install-strip
 install -m 755 scripts/vmailmgrd.init $RPM_BUILD_ROOT/etc/rc.d/init.d/vmailmgrd
 install -m 755 scripts/vmailmgrd.svc $RPM_BUILD_ROOT/var/service/vmailmgrd/run
@@ -121,13 +121,13 @@ fi
 %files cgi
 %defattr(-,root,root)
 %doc cgi/*.html
-/home/httpd/cgi-bin/listvdomain
-/home/httpd/cgi-bin/vaddalias
-/home/httpd/cgi-bin/vadduser
-/home/httpd/cgi-bin/vchattr
-/home/httpd/cgi-bin/vchforwards
-/home/httpd/cgi-bin/vdeluser
-/home/httpd/cgi-bin/vpasswd
+/usr/www/httpd/cgi-bin/listvdomain
+/usr/www/httpd/cgi-bin/vaddalias
+/usr/www/httpd/cgi-bin/vadduser
+/usr/www/httpd/cgi-bin/vchattr
+/usr/www/httpd/cgi-bin/vchforwards
+/usr/www/httpd/cgi-bin/vdeluser
+/usr/www/httpd/cgi-bin/vpasswd
 
 %files courier-imap
 %defattr(-,root,root)
@@ -147,11 +147,11 @@ fi
 %files php
 %defattr(-,root,root)
 %doc php/vmail.features
-/home/httpd/php/*
+/usr/www/httpd/php/*
 
 %files python
 %defattr(-,root,root)
 %doc python/*.html
-/home/httpd/cgi-bin/vautoresponse
-/home/httpd/cgi-bin/vcommand
+/usr/www/httpd/cgi-bin/vautoresponse
+/usr/www/httpd/cgi-bin/vcommand
 /usr/lib/python1.5/*

@@ -1597,7 +1597,7 @@ else
   WANTPYTHON_FALSE=
 fi
 
-phpdir="/home/httpd/php"
+phpdir="/usr/www/httpd/php"
 
 
 # Extract the first word of "w3m", so it can be a program name with args.

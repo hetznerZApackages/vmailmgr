@@ -1,3 +1,9 @@
+vmailmgr (1:0.96.9-1+hetz1~exp3) jessie-hetz-experimental; urgency=low
+
+  * Change from using /home/httpd to /usr/www/httpd so not to clash
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Wed, 05 Jul 2017 10:09:55 +0200
+
 vmailmgr (1:0.96.9-1+hetz1~exp2) jessie-hetz-experimental; urgency=low
 
   * Forward port from wheezy
