@@ -1,3 +1,9 @@
+vmailmgr (1:0.96.9-1+hetz1) jessie-hetz; urgency=low
+
+  * Released 1:0.96.9-1+hetz1~exp3 as 1:0.96.9-1+hetz1
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Tue, 01 Aug 2017 08:51:13 +0200
+
 vmailmgr (1:0.96.9-1+hetz1~exp3) jessie-hetz-experimental; urgency=low
 
   * Change from using /home/httpd to /usr/www/httpd so not to clash
