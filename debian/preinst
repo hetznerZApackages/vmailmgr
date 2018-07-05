@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "upgrade" ] ; then
+    if [ -d /run/systemd/system ]; then
+        deb-systemd-invoke stop vmailmgrd.service || true
+    fi
+    if [ -f /etc/init.d/vmailmgr ]; then
+        rm -f /etc/init.d/vmailmgr || true
+    fi
+fi
+
