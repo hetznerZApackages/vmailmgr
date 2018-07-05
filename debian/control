@@ -8,7 +8,7 @@ Homepage: http://untroubled.org/vmailmgr/
 
 Package: vmailmgr
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, socat
+Depends: ${shlibs:Depends}, ${misc:Depends}
 Conflicts: vmailmgr-ha
 Replaces: vmailmgr-ha
 Description: Simple virtualizing POP3 password interface
