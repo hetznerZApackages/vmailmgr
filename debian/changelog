@@ -1,10 +1,10 @@
-vmailmgr (1:0.96.9-1+hetz2~exp2) jessie-hetz-experimental; urgency=low
+vmailmgr (1:0.96.9-1+hetz2~exp3) jessie-hetz-experimental; urgency=low
 
   * Vmail manager does not start as a service anymore
   * Old versions did not stop during uninstall, so now we stop during install
   * Thus it does not require socat
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Thu, 05 Jul 2018 14:47:10 +0200
+ -- Willem Basson <willem.basson@hetzner.co.za>  Thu, 05 Jul 2018 15:03:18 +0200
 
 vmailmgr (1:0.96.9-1+hetz1) jessie-hetz; urgency=low
 
