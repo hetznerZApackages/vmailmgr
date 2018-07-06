@@ -1,3 +1,9 @@
+vmailmgr (1:0.96.9-1+hetz2) jessie-hetz; urgency=low
+
+  * Released 1:0.96.9-1+hetz2~exp3 as 1:0.96.9-1+hetz2
+
+ -- Willem Basson <willem.basson@hetzner.co.za>  Fri, 06 Jul 2018 09:43:29 +0200
+
 vmailmgr (1:0.96.9-1+hetz2~exp3) jessie-hetz-experimental; urgency=low
 
   * Vmail manager does not start as a service anymore
