@@ -1,8 +1,14 @@
-vmailmgr (1:0.96.9-1+hetz2) jessie-hetz; urgency=low
+vmailmgr (1:0.96.9-1+hetz2~exp1) stretch-hetz-experimental; urgency=low
+
+  * Attempt to build stretch
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 18 Jun 2019 08:55:23 +0200
+
+vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 
   * Released 1:0.96.9-1+hetz2~exp3 as 1:0.96.9-1+hetz2
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Fri, 06 Jul 2018 09:43:29 +0200
+ -- Geoff Robertson <gr@hetzner.co.za>  Tue, 18 Jun 2019 08:55:23 +0200
 
 vmailmgr (1:0.96.9-1+hetz2~exp3) jessie-hetz-experimental; urgency=low
 
