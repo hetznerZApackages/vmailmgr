@@ -3,7 +3,7 @@ vmailmgr (1:0.97.1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
   * Initial Stretch version - replaced source_code with  https://github.com/bruceg/vmailmgr
   * deleted sheldon's patch that patches code that does not exist
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Tue, 25 Jun 2019 14:03:38 +0200
+ -- Willem Basson <willem.basson@hetzner.co.za>  Tue, 25 Jun 2019 14:06:03 +0200
 
 vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 
