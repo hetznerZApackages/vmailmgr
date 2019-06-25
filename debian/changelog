@@ -1,8 +1,8 @@
 vmailmgr (1:0.96.9-1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
 
-  * Initial Stretch version
+  * Initial Stretch version - replaced our configure.in with confifure.ac from https://github.com/bruceg/vmailmgr
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Tue, 25 Jun 2019 12:47:43 +0200
+ -- Willem Basson <willem.basson@hetzner.co.za>  Tue, 25 Jun 2019 13:35:00 +0200
 
 vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 
