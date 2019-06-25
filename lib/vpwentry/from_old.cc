@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -28,13 +28,15 @@ bool vpwentry::from_old_record(const mystring& text)
   pass = text.sub(1, end-passptr);
   ++end;
   if(*end == '.' || *end == '/') {
-    mailbox = end;
+    has_mailbox = true;
+    directory = end;
     forwards = 0;
   }
   else {
     if(*end == '&')
       ++end;
-    mailbox = 0;
+    has_mailbox = false;
+    directory = 0;
     forwards = end;
     forwards = forwards.subst(',', '\0');
   }

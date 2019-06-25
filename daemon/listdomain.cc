@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -53,15 +53,16 @@ CMD_FD(listdomain)
   if(!write_buf(fd, "", 0))
     RETURN(err, "Failed while writing initial OK response");
 
-  vpwentry entry;
-  while(reader->get(entry)) {
-    mystring code = entry.to_record();
-    unsigned length = entry.name.length() + 1 + code.length() + 1;
+  vpwentry* entry;
+  while((entry = reader->get()) != 0) {
+    mystring code = entry->to_record();
+    unsigned length = entry->name.length() + 1 + code.length();
     char buf[length];
-    memcpy(buf, entry.name.c_str(), entry.name.length()+1);
-    memcpy(buf+entry.name.length()+1, code.c_str(), code.length()+1);
+    memcpy(buf, entry->name.c_str(), entry->name.length()+1);
+    memcpy(buf+entry->name.length()+1, code.c_str(), code.length());
     if(!write_buf(fd, buf, length))
       RETURN(err, "Failed while writing list entry");
+    delete entry;
   }
   
   delete reader;

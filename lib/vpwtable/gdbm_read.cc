@@ -1,4 +1,4 @@
-// Copyright (C) 2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -17,13 +17,28 @@
 #include <config.h>
 #include "vpwtable.h"
 #include <stdlib.h>
+#include <gdbm.h>
+
+class gdbm_vpwtable_reader : public vpwtable_reader
+{
+private:
+  GDBM_FILE dbf;
+  datum key;
+public:
+  gdbm_vpwtable_reader(const mystring& filename);
+  ~gdbm_vpwtable_reader();
+  bool operator!() const;
+  vpwentry* get();
+  bool rewind();
+  bool end();
+};
 
 vpwtable_reader* vpwtable::start_read() const
 {
-  return new vpwtable_reader(filename);
+  return new gdbm_vpwtable_reader(filename);
 }
 
-vpwtable_reader::vpwtable_reader(const mystring& filename)
+gdbm_vpwtable_reader::gdbm_vpwtable_reader(const mystring& filename)
   : dbf(gdbm_open((char*)filename.c_str(), 0, GDBM_READER, 0, 0))
 {
   if(dbf)
@@ -32,12 +47,17 @@ vpwtable_reader::vpwtable_reader(const mystring& filename)
     key.dptr = 0;
 }
 
-bool vpwtable_reader::operator!() const
+gdbm_vpwtable_reader::~gdbm_vpwtable_reader()
+{
+  end();
+}
+
+bool gdbm_vpwtable_reader::operator!() const
 {
   return !dbf;
 }
 
-bool vpwtable_reader::end() 
+bool gdbm_vpwtable_reader::end() 
 {
   if(dbf)
     gdbm_close(dbf);
@@ -48,7 +68,7 @@ bool vpwtable_reader::end()
   return true;
 }
 
-bool vpwtable_reader::rewind()
+bool gdbm_vpwtable_reader::rewind()
 {
   if(dbf) {
     key = gdbm_firstkey(dbf);
@@ -57,17 +77,16 @@ bool vpwtable_reader::rewind()
   return false;
 }
 
-bool vpwtable_reader::get(vpwentry& out)
+vpwentry* gdbm_vpwtable_reader::get()
 {
+  vpwentry* v = 0;
   if(key.dptr) {
     mystring name(key.dptr, key.dsize);
     datum rec = gdbm_fetch(dbf, key);
     mystring result(rec.dptr, rec.dsize);
     free(rec.dptr);
-    if(!out.from_record(name, result))
-      return false;
+    v = vpwentry::new_from_record(name, result);
     key = gdbm_nextkey(dbf, key);
-    return true;
   }
-  return false;
+  return v;
 }

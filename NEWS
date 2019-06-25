@@ -1,4 +1,70 @@
 -------------------------------------------------------------------------------
+Changes in version 0.97.1
+
+Bug Fixes:
+- Fixed bug in making a maildir over top of an existing account.
+  Thanks Dale Woolridge.
+-------------------------------------------------------------------------------
+Changes in version 0.97
+
+New Features:
+- Aliases can now have autoresponders.
+- New "stat" command in the daemon to lookup the mailbox size.
+- Added a "dumpvuser" command, to output all of an account's data.
+- Renamed vpasswd2db to vupgrade and allvpasswd2db to vupgrade-all.
+- Authentication recognizes plain text (null-crypt) passwords.
+- Added options to turn off execution of vdeliver-predeliver and
+  vdeliver-postdeliver.
+- Added option to vadduser to specify the pre-encrypted password.
+
+Internal Changes:
+- All accounts are created with an account directory now.
+- Created a vpwtable writer interface, and removed the CDB-specific
+  commands.
+- Added adduser3 daemon function, which works the same as the existing
+  adduser2 function but with an additional has-mailbox parameter.
+- New CDB library that uses mmap instead of file reads for efficiency.
+- Removed the vcheckquota and vpopbull tools that are now part of the
+  vmailmgr-tools package.
+
+Bug Fixes:
+- Fixed a bug in Python library that caused the listdomain command to fail
+  on some OS's.
+- Fixed a bug in the PHP library that caused long listdomains to fail.
+- Exit code 99 from vdeliver-predeliver now causes vdeliver to exit
+  (with code 99) without delivering the message.
+- Fixed a bug that caused creating directories with a trailing slash to
+  fail.
+- Fixed the use of libstdc++ in showvconfig.
+- Personal information can now be changed by the virtual user in the daemon.
+-------------------------------------------------------------------------------
+Changes in version 0.96.9
+
+New Features:
+- vdeluser now has an option to prevent it from deleting users with a
+  mailbox.
+- All the Python CGI code has been dropped.  A stand-alone vpyadmin
+  package (to be release very shortly) will replace the Python CGIs.
+  Between this new interface and the PHP code, the C++ CGIs are
+  depricated and will be removed in a future version, unless somebody
+  violently objects.
+
+Internal Changes:
+- Cleaned up the vpwtable API.
+- New CLI documentation generator, should help keep the man pages and
+  the programs in sync.
+- Major overhaul to the Python library.
+
+Bug Fixes:
+- Fixed error handling in vdeliver to properly handle file-system quota
+  errors.
+- Fixed a bug in the Courier IMAP authentication module that prevented
+  non-virtual users from authenticating.
+- The daemon now exits immediately if a SIGALRM or SIGPIPE is caught,
+  instead of completing the action.
+- Fixed a bug in autodetecting Python.  It should now work with any
+  version of make.
+-------------------------------------------------------------------------------
 Changes in version 0.96.8
 
 New Features:

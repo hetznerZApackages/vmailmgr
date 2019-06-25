@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,17 +16,14 @@
 
 #include <config.h>
 #include "vpwtable.h"
+#include "cdb++/cdb++.h"
 
 vpwentry* vpwtable::getbyname(const mystring& name) const
 {
   datum* d = cdb_getrec(filename, name.lower());
   if(!d)
     return 0;
-  vpwentry v;
-  if(!v.from_record(name, d->data)) {
-    delete d;
-    return 0;
-  }
+  vpwentry* v = vpwentry::new_from_record(name, d->data);
   delete d;
-  return new vpwentry(v);
+  return v;
 }

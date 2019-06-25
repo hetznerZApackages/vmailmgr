@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -22,17 +22,25 @@
 #include <sys/stat.h>
 #include <signal.h>
 #include <unistd.h>
-#include "cli/cli.h"
+#include "cli++/cli++.h"
 #include "daemon.h"
 
-const char* cli_program = "clitest";
-const char* cli_help_prefix = "Does nothing but set flags\n";
+const char* cli_program = "vmailmgrd";
+const char* cli_help_prefix = "vmailmgr support daemon\n";
 const char* cli_help_suffix = "";
 const char* cli_args_usage = "";
 const int cli_args_min = 0;
-const int cli_args_max = -1;
+const int cli_args_max = 0;
 int opt_log_all = true;
 int opt_verbose = false;
+
+// This program is the local server that is used to handle managing
+// virtual domains from a web or remote interface.
+//
+// F<vmailmgrd> logs its activity to standard output, and as such
+// requires its output to be piped through a tool to record those
+// logs, such as F<multilog> (from the F<daemontools> package).
+
 cli_option cli_options[] = {
   { 'd', 0, cli_option::flag, 0, &opt_log_all,
     "Log only requests that fail", 0 },
@@ -42,7 +50,14 @@ cli_option cli_options[] = {
     "Log non-verbosely (default)", 0 },
   { 'V', 0, cli_option::flag, 1, &opt_verbose,
     "Log verbosely", 0 },
-  {0} };
+  // Log verbose messages regarding the system's status.
+  // Note that this flag implies C<-D>.
+  {0}
+};
+
+// SEE ALSO
+//
+// vdeliver(1), checkvpw(8)
 
 #define TIMEOUT 1
 
@@ -75,12 +90,14 @@ static RETSIGTYPE handle_alrm(int)
 {
   signal(SIGALRM, handle_alrm);
   abortreq("Timed out waiting for remote");
+  exit(1);
 }
 
 static RETSIGTYPE handle_pipe(int) 
 {
   signal(SIGPIPE, handle_pipe);
   abortreq("Connection to client lost");
+  exit(1);
 }
 
 static RETSIGTYPE handle_intr(int)

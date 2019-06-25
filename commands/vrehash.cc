@@ -1,5 +1,4 @@
-
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -25,26 +24,55 @@
 #include "mystring/mystring.h"
 #include "misc/maildir.h"
 #include "config/configrc.h"
-#include "vpwentry/vpwentry.h"
 #include "vcommand.h"
 #include "misc/stat_fns.h"
-#include "cli/cli.h"
-#include "cdb++/cdb++.h"
+#include "cli++/cli++.h"
 
 const char* cli_program = "vrehash";
-const char* cli_help_prefix =
+const char* cli_help_prefix = "Reorganize users directory\n"
 "Renames user directories in a virtual domain to match the current\n"
 "partitioning scheme\n";
 const char* cli_help_suffix = "";
 const char* cli_args_usage = "";
 const int cli_args_min = 0;
 const int cli_args_max = 0;
-cli_option cli_options[] = { {0} };
 
-static cdb_reader* in = 0;
-static cdb_writer* out = 0;
-static mystring cdbfilename;
-static mystring tmpfilename;
+// This program is designed to be run after the sysadmin has changed the
+// C<user-dir-bits> or C<user-dir-slices> configuration variables.
+// It creates a new users directory called C<new.users>, where C<users>
+// is the configured name of the user directory.
+// It then traverses the password table, creates a new user directory name
+// for each user, and moves the user's mail directory to the new
+// directory name, creating any necessary directories as it goes.
+// Any alias entries in the password table are copied as-is.
+
+cli_option cli_options[] = {
+  {0}
+};
+
+// RETURN VALUE
+//
+// Returns 1 if any part of the process fails; 0 otherwise.
+
+// NOTES
+//
+// When the process is completed, a the old users directory will have
+// been moved to C<backup.users>.
+// If no errors occurred, you should be able to safely delete this
+// directory and all its subdirectories.
+// Check this directory first, though, to ensure that no important files
+// remain.
+
+// WARNINGS
+//
+// This program is not particularly careful to clean up after itself if
+// an error occurs.
+// If an error occurs, you will have to check the status of the current
+// directory, the virtual password file, and all the virtual users
+// subdirectories in both C<users> and C<new.users>.
+
+static vpwtable_reader* in = 0;
+static vpwtable_writer* out = 0;
 static mystring newuserdir;
 static mystring backupdir;
 
@@ -57,15 +85,18 @@ mystring lock_dir()
     return "Directory is already locked";
   if(chmod(".", buf.st_mode | S_ISVTX))
     return "Can't lock directory";
-  cdbfilename = password_file + ".cdb";
-  tmpfilename = cdbfilename + ".tmp";
-  in = new cdb_reader(cdbfilename);
+
+  vpwtable* table = domain.table();
+  
+  in = table->start_read();
   if(!*in)
     return "Could not open virtual password table";
-  out = new cdb_writer(tmpfilename, 0600);
+
+  out = table->start_write();
   if(!*out)
-    return "Could not open temporary table exclusively";
-  return "";
+    return "Could not open virtual password table writer";
+
+  return 0;
 }
 
 mystring unlock_dir()
@@ -78,7 +109,7 @@ mystring unlock_dir()
   if(chmod(".", buf.st_mode & ~S_ISVTX))
     return "Can't unlock directory";
   if(out) {
-    if(out->end(cdbfilename)) {
+    if(out->end()) {
       delete out;
       return "Error completing the virtual password table";
     }
@@ -86,15 +117,6 @@ mystring unlock_dir()
   }
   delete in;
   return "";
-}
-
-bool getvpwent(vpwentry& vpw)
-{
-  autodelete<datum> d = in->nextrec();
-  if(!d)
-    return false;
-  vpw.from_record(d->key, d->data);
-  return true;
 }
 
 mystring user_dir;
@@ -108,28 +130,29 @@ mystring translate_one(vpwentry& vpw)
   mystring tmpdir = newdir.left(newdir.find_last('/'));
   if(mkdirp(tmpdir.c_str(), 0755))
     return "Error creating a user subdirectory: " + tmpdir;
-  if(rename(vpw.mailbox.c_str(), newdir.c_str()))
-    return "Error moving a user subdirectory." + vpw.mailbox;
-  vpw.mailbox = vpwdir;
+  if(rename(vpw.directory.c_str(), newdir.c_str()))
+    return "Error moving a user subdirectory." + vpw.directory;
+  vpw.directory = vpwdir;
   return "";
 }
 
 mystring translate()
 {
-  vpwentry vpw;
+  vpwentry* vpw;
   unsigned errors = 0;
-  while(getvpwent(vpw)) {
-    if(!!vpw.mailbox) {
-      mystring response = translate_one(vpw);
+  while((vpw = in->get()) != 0) {
+    if(vpw->has_mailbox) {
+      mystring response = translate_one(*vpw);
       if(!!response) {
 	ferr << "vrehash: " << response;
 	++errors;
       }
     }
-    if(!out->put(vpw.name, vpw.to_record())) {
+    if(!out->put(*vpw)) {
       return "vrehash: failed to add entry to table";
       ++errors;
     }
+    delete vpw;
   }
   return "";
 }

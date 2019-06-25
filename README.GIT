@@ -1,0 +1,5 @@
+To get the pieces not included in this repository, you need to run:
+
+	( cd lib/config && sh build-config.sh )
+
+	autoreconf --install

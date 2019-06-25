@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -39,6 +39,7 @@ CMD(chattr)
     break;
   case vdomain::ATTR_DEST:
   case vdomain::ATTR_MAILBOX_ENABLED:
+  case vdomain::ATTR_PERSONAL:
     userpass = true;
     break;
   }

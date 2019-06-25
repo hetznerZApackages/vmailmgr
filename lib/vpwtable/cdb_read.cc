@@ -1,4 +1,4 @@
-// Copyright (C) 2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,38 +18,55 @@
 #include "vpwtable.h"
 #include <stdlib.h>
 #include "misc/autodelete.h"
+#include "cdb++/cdb++.h"
+
+class cdb_vpwtable_reader : public vpwtable_reader
+{
+private:
+  cdb_reader cdb;
+public:
+  cdb_vpwtable_reader(const mystring& filename);
+  ~cdb_vpwtable_reader();
+  bool operator!() const;
+  vpwentry* get();
+  bool rewind();
+  bool end();
+};
 
 vpwtable_reader* vpwtable::start_read() const
 {
-  return new vpwtable_reader(filename);
+  return new cdb_vpwtable_reader(filename);
 }
 
-vpwtable_reader::vpwtable_reader(const mystring& filename)
+cdb_vpwtable_reader::cdb_vpwtable_reader(const mystring& filename)
   : cdb(filename)
 {
 }
 
-bool vpwtable_reader::operator !() const
+cdb_vpwtable_reader::~cdb_vpwtable_reader()
+{
+  end();
+}
+
+bool cdb_vpwtable_reader::operator !() const
 {
   return !cdb;
 }
 
-bool vpwtable_reader::end() 
+bool cdb_vpwtable_reader::end() 
 {
   return true;
 }
 
-bool vpwtable_reader::rewind()
+bool cdb_vpwtable_reader::rewind()
 {
   return !!cdb && cdb.firstrec();
 }
 
-bool vpwtable_reader::get(vpwentry& out)
+vpwentry* cdb_vpwtable_reader::get()
 {
   autodelete<datum> rec = cdb.nextrec();
   if(!rec)
-    return false;
-  if(!out.from_record(rec->key, rec->data))
-    return false;
-  return true;
+    return 0;
+  return vpwentry::new_from_record(rec->key, rec->data);
 }

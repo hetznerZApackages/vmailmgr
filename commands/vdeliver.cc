@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000,2005 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <config.h>
+#include <errno.h>
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/stat.h>
@@ -22,7 +23,7 @@
 #include "ac/wait.h"
 #include <signal.h>
 #include "fdbuf/fdbuf.h"
-#include "cli/cli.h"
+#include "cli++/cli++.h"
 #include "vcommand.h"
 #include "misc/itoa.h"
 #include "misc/stat_fns.h"
@@ -38,24 +39,60 @@ static int addufline = false;
 static int addrpline = true;
 static int adddtline = true;
 static int o_quiet = false;
+static int run_predeliver = true;
+static int run_postdeliver = true;
+
+// vdeliver is the unified e-mail message delivery agent for virtual
+// domains managed by vmailmgr.
+// It is run from the F<.qmail-default> file, and automatically handles
+// delivery to any user within a virtual domain.
 
 cli_option cli_options[] = {
   { 'D', 0, cli_option::flag, true, &adddtline,
     "Add a \"Delivered-To:\" line (default)", 0 },
+  // Add the C<Return-Path:> line to the top of the message. (default)
   { 'F', 0, cli_option::flag, true, &addufline,
     "Add a \"From \" mailbox line", 0 },
   { 'R', 0, cli_option::flag, true, &addrpline,
     "Add a \"Return-Path:\" line (default)", 0 },
   { 'd', 0, cli_option::flag, false, &adddtline,
     "Do not add the \"Delivered-To:\" line", 0 },
+  //Do not add the C<Delivered-To:> line to the top of the message.
   { 'f', 0, cli_option::flag, false, &addufline,
     "Do not add the \"From \" mailbox line (default)", 0 },
+  // Do not add the C<From> mailbox line to the top of the message.
+  // Note that this line is never added when the message is being
+  // re-injected into the mail stream. (default)
+  { 0, "no-predeliver", cli_option::flag, false, &run_predeliver,
+    "Do not run vdeliver-predeliver scripts", 0 },
+  { 0, "no-postdeliver", cli_option::flag, false, &run_postdeliver,
+    "Do not run vdeliver-postdeliver scripts", 0 },
   { 0, "quiet", cli_option::flag, true, &o_quiet,
     "Suppress all status messages", 0 },
   { 'r', 0, cli_option::flag, false, &addrpline,
     "Do not add the \"Return-Path:\" line", 0 },
+  // Do not add the C<Return-Path:> line to the top of the message.
   {0}
 };
+
+// RETURN VALUE
+//
+// Returns 0 if delivery was successful,
+// 100 if a fatal error occurred,
+// or 111 if a temporary error occurred.
+
+// ENVIRONMENT
+//
+// F<vdeliver> expects to be run by F<qmail-local> as it requires several
+// of the environment variables that it sets.
+// See the I<qmail-command>(8) manual page for full details on these
+// variables.
+// In particular, it requires C<DTLINE>, C<EXT>, C<HOST>, C<RPLINE>,
+// C<SENDER>, C<UFLINE>, and C<USER>.
+
+// SEE ALSO
+//
+// checkvpw(1), I<qmail-command>(8)
 
 #ifndef HAVE_GETHOSTNAME
 int gethostname(char *name, size_t len);
@@ -84,6 +121,11 @@ void exit_msg(const char* msg1, const mystring& msg2, int code)
 
 void die_fail(const char* msg) { exit_msg(msg, 100); }
 void die_temp(const char* msg) { exit_msg(msg, 111); }
+
+void fail_quota()
+{
+  die_fail("Delivery failed due to system quota violation");
+}
 
 mystring read_me()
 {
@@ -144,10 +186,20 @@ void deliver_partial()
       continue;
     else {
       fdobuf out(tmpfile.c_str(), fdobuf::create | fdobuf::excl, 0600);
-      if(!out)
+      if(!out) {
+#ifdef EDQUOT
+	if(out.error_number() == EDQUOT)
+	  fail_quota();
+#endif
 	continue;
-      if(!dump(out, true))
+      }
+      if(!dump(out, true)) {
+#ifdef EDQUOT
+	if(out.error_number() == EDQUOT)
+	  fail_quota();
+#endif
 	die_temp("Error writing the output file.");
+      }
       return;
     }
   }
@@ -269,35 +321,49 @@ int cli_main(int, char*[])
   if(!adddtline)
     dtline = 0;
 
-  vpwentry* vpw = domain.lookup(ext, false);
+  vpwentry* vpw = domain.lookup(ext);
+  if(!vpw)
+    vpw = domain.lookup(config->default_username());
   if(!vpw)
     die_fail(mystring("Invalid or unknown virtual user '" + ext + "'").c_str());
   if(vpw->expiry < (unsigned)time(0))
     die_fail(mystring("Virtual user '" + ext + "' has expired").c_str());
   
   vpw->export_env();
-  bool enabled = vpw->is_mailbox_enabled && !!vpw->mailbox;
+  bool do_delivery = vpw->has_mailbox && vpw->is_mailbox_enabled &&
+    !!vpw->directory;
 
-  int r = execute("vdeliver-predeliver");
-  if(r)
-    exit_msg("Execution of vdeliver-predeliver failed", r);
+  if (run_predeliver) {
+    int r = execute("vdeliver-predeliver");
+    if(r)
+      if(r == 99)
+	return 99;
+      else
+	exit_msg("Execution of vdeliver-predeliver failed", r);
+  }
 
-  if(enabled) {
-    maildir = vpw->mailbox;
+  if(do_delivery) {
+    maildir = vpw->directory;
     deliver_partial();
   }
   if(!!vpw->forwards)
     enqueue(vpw->forwards, host, sender);
-  if(enabled)
+  if(do_delivery)
     deliver_final();
 
   if(!fin.rewind()) {
     if(!o_quiet)
       fout << "Could not re-rewind standard input" << endl;
   }
-  else if(execute("vdeliver-postdeliver"))
-    if(!o_quiet)
-      fout << "Execution of vdeliver-postdeliver failed" << endl;
-
+  else {
+    if (run_postdeliver) {
+      int r = execute("vdeliver-postdeliver");
+      if(r && r != 99)
+	if(!o_quiet)
+	  fout << "Execution of vdeliver-postdeliver failed" << endl;
+      return r;
+    }
+  }
+  
   return 0;
 }

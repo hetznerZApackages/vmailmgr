@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,6 +16,7 @@
 
 #include <config.h>
 #include <errno.h>
+#include <stdlib.h>
 #include <string.h>
 #include <sys/types.h>
 #include "config/configrc.h"
@@ -104,14 +105,16 @@ auth_data* getdata()
   return new auth_data(name, pass, stamp);
 }
 
-//char* strcasestr(const char* haystack, const char* needle)
-//{
-//  for(size_t hlength = strlen(haystack), nlength = strlen(needle);
-//      hlength >= nlength; hlength--, haystack++)
-//    if(!strncasecmp(haystack, needle, nlength))
-//      return (char*)haystack;
-//  return 0;
-//}
+#ifndef HAVE_STRCASESTR
+char* strcasestr(const char* haystack, const char* needle)
+{
+  for(size_t hlength = strlen(haystack), nlength = strlen(needle);
+      hlength >= nlength; hlength--, haystack++)
+    if(!strncasecmp(haystack, needle, nlength))
+      return (char*)haystack;
+  return 0;
+}
+#endif
 
 unsigned find_maildir(int argc, const char* args[])
 {

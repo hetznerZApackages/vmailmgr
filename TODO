@@ -1,0 +1,136 @@
+Here are the things that I have left to complete (roughly in order of
+personal preference).  I have seperated it into a series of release
+targets in order to have short quantitative goals for making new
+releases.
+-------------------------------------------------------------------------------
+FOR VERSION 0.97:
+
+- Revert vdomain::lookup back to the single-argument case, and yank the
+  dead code.
+
+- Add tests for:
+  - proper handling of creating paths with a trailing '/'
+  - authvmailmgr
+  - execution of presetuid and postsetuid hooks in authvmailmgr
+  - daemon "stat" command
+  - daemon adduser3 command
+  - vupgrade command
+  - exit 99 from vdeliver-predeliver causes delivery to be skipped
+
+- Add note to FAQ or HOWTO regarding the two web interfaces
+
+- Add more complete tests to verify correct operation of "vaddusers"
+  command.
+-------------------------------------------------------------------------------
+FOR VERSION 0.97.1:
+
+- Add a "vrenuser" tool.
+
+- Make vcheckquota and daemon stat handle folders.
+
+- Always "touch" $VUSER/cur on successful authentication, to provide for
+  a "last login time".
+
+- Expand the record format to include a "last modified" field, and to
+  change the flag values from binary 0/1 to ASCII.
+
+- Add note to FAQ regarding PHP error code 255 meaning the daemon is not
+  running properly (once it's been confirmed).
+
+- Fix checkvpw to set MAILDIR before executing postsetuid somehow
+
+- Make quota check program check all directories.
+
+- Add Courier IMAP support to the bulletin facility
+
+- Convert existing TeXinfo documentation to SGML
+
+- Make vrehash take the bits and slices values as command-line
+  parameters.
+-------------------------------------------------------------------------------
+FOR VERSION 0.98:
+
+- Make the TCP daemon the default usage, and drop the unixserver
+  requirement.
+
+- Make the daemon commands stand-alone modules, using the revised daemon
+  communication protocol.  The daemon then just forks, reads in the
+  command name, validates it, and hands off to an authentication module.
+
+- The authentication module checks for a custom authentication type
+  based on the command name, does authentication, does setuid, chdir,
+  and executes the actual command.
+-------------------------------------------------------------------------------
+FOR VERSION 1.00:
+
+- Make vdeliver write to both the output file and the queue
+  simultaneously, to avoid needing to do rewinds:
+  - make pipe
+  - open tmp maildir file
+  - fork (child exec's qmail-queue)
+  - read data from stdin
+  - write data to file and pipe
+  - if write to pipe fails, delete maildir tmp file and fail
+  - if write to file fails, close pipe and fail
+  - write envelope to qmail-queue
+  - catch exit from qmail-queue
+  - close & sync maildir tmp file
+-------------------------------------------------------------------------------
+AFTER VERSION 1.00:
+
+- Bug fixes and clean-ups, and documentation improvements
+
+- Add the necessary code for *DBM, MySQL, and PostgreSQL password tables.
+
+- add a "vadddomain" command that:
+  - adds a new user to /etc/passwd
+  - creates the new user directory
+  - su's to that user and runs vsetup
+  - fixes the user's home directory permissions
+  - adds entries to control/virtualdomains
+  - adds entries to control/rcpthosts
+
+- dynamic information per mailbox:
+  - total number of emails and bytes received
+  - number of emails and bytes currently
+  - time of first and last messages
+  - last access time via POP3
+  - text file named "data"
+  - one line per datum, using "key=value" format
+
+- Write library routines, interfaced through vpwentry, that can
+  get/set the dynamic data.
+
+- Modifiy the pop bulletin command to take the bulletin directory on the
+  command line?
+
+- Continue to seperate the "misc" library directory into modules.
+
+- Add a daemon command to list all the configuration for a virtual
+  domain.
+
+- document vchattr, vchforwards
+
+- limit the number of accounts created per virtual domain
+
+- look into interoperating with sqwebmail http://www.inter7.com/sqwebmail/
+
+- look into interoperating with qmailadmin http://www.inter7.com/qmailadmin/
+
+- add support for a streaming protocol, such that multiple commands
+  could be issued per daemon session
+
+- in all the command-line programs:
+  - if the environment variable VDOMAIN is set, read the virtual domain
+    from that variable, prompt for a password, and do a server call
+
+- In vmailmgrd:
+  ? add support for PAM for non-virtual users (this may be difficult,
+    requiring a change in the authentication model)
+
+- Develop support for HMAC passcodes, in order to support CRAM-MD5
+  authentication, as per RFCs 2195 and 2104.
+
+- miscelaneous
+  - code clean-ups, including internal documentation
+

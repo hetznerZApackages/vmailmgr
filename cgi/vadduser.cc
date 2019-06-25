@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,21 +30,20 @@ CGI_MAIN
 
   unsigned dests = !destination ? 0 : destination.count(',') + 1;
   
-  if(!userdir)
-    userdir = username;
   if(newpass1 != newpass2)
     error("The passwords you entered do not match");
   else {
-    server_call call("adduser2", dests + 5);
+    server_call call("adduser3", dests + 6);
     call.operand(0, vdomain);
     call.operand(1, username);
     call.operand(2, password);
     call.operand(3, newpass1);
     call.operand(4, userdir);
+    call.operand(5, "yes");
 
     unsigned i = 0;
     for(mystring_iter iter(destination, ','); i < dests && iter; ++iter, ++i)
-      call.operand(i+5, *iter);
+      call.operand(i+6, *iter);
 
     response resp = call.call();
     if(!resp)

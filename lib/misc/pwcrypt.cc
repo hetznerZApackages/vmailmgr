@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000,2005 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,33 +30,6 @@ char *crypt(const char *key, const char *salt);
 long int random(void);
 #endif
 
-#ifdef USE_CRYPT
-
-static const char passwd_table[65] =
-"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
-
-bool crypt_cmp(const mystring& pass, const mystring& stored)
-{
-  if(!stored || !pass)
-    return false;
-  const char* encrypted = crypt(pass.c_str(), stored.c_str());
-  return stored == encrypted;
-}
-
-const char* pwcrypt(const mystring& pass)
-{
-  char salt[2] = {
-    passwd_table[random() % 64],
-    passwd_table[random() % 64]
-  };
-  return crypt(pass.c_str(), salt);
-}
-
-#else // USE_CRYPT
-
-static const char passwd_table[65] =
-"./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
 extern "C"
 {
 #include "md5.h"
@@ -85,6 +58,13 @@ static const char* encrypt_old_md5(const mystring& pass)
 
 extern "C" char *md5_crypt __P ((const char *key, const char *salt));
 
+const char* null_crypt(const mystring& pass)
+{
+  static mystring s;
+  s = "$0$" + pass;
+  return s.c_str();
+}
+
 bool crypt_cmp(const mystring& pass, const mystring& stored)
 {
   if(!stored || !pass)
@@ -94,10 +74,31 @@ bool crypt_cmp(const mystring& pass, const mystring& stored)
     encrypted = encrypt_old_md5(pass.c_str());
   else if(stored[0] == '$' && stored[1] == '1' && stored[2] == '$')
     encrypted = md5_crypt(pass.c_str(), stored.c_str());
+  else if(stored[0] == '$' && stored[1] == '0' && stored[2] == '$')
+    encrypted = null_crypt(pass);
   else
     encrypted = crypt(pass.c_str(), stored.c_str());
   return stored == encrypted;
 }
+
+#ifdef USE_CRYPT
+
+static const char passwd_table[65] =
+"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789./";
+
+const char* pwcrypt(const mystring& pass)
+{
+  char salt[2] = {
+    passwd_table[random() % 64],
+    passwd_table[random() % 64]
+  };
+  return crypt(pass.c_str(), salt);
+}
+
+#else
+
+static const char passwd_table[65] =
+"./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
 
 const char* pwcrypt(const mystring& pass)
 {
@@ -108,4 +109,4 @@ const char* pwcrypt(const mystring& pass)
   return md5_crypt(pass.c_str(), salt);
 }
 
-#endif // USE_MD5
+#endif

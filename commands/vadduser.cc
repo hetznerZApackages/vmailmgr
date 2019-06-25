@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -23,13 +23,13 @@
 #include "config/configrc.h"
 #include "misc/pwcrypt.h"
 #include "vcommand.h"
-#include "cli/cli.h"
+#include "cli++/cli++.h"
 
 const char* cli_program = "vadduser";
 const char* cli_help_prefix = "Add a user to a virtual domain\n";
 const char* cli_help_suffix = "";
 const char* cli_args_usage = "USERNAME [ALIAS1 ...]\n"
-"or vaddalias [-f ADDRESS] USERNAME [ALIAS1 ...]";
+"or vaddalias USERNAME [ALIAS1 ...]";
 const int cli_args_min = 1;
 const int cli_args_max = -1;
 
@@ -41,24 +41,41 @@ static int o_hardquota = 0;
 static int o_msgsize = 0;
 static int o_msgcount = 0;
 static int o_expiry = 0;
-//static cli_stringlist* o_extra = 0;
 static int o_password = true;
-static int o_domailbox = true;
+static int o_hasmailbox = true;
 static int o_quiet = false;
+static const char* o_pwcrypt = 0;
+
+// This program is used to set up a user within a virtual host.
+// If this program is reading from a tty,
+// it will then ask for a password (twice, to make sure you typed it in
+// correctly), otherwise it will read the password from the input with no
+// prompting.
+// It will then
+// add the user to the virtual password table in the current
+// directory and create a mail directory for the new user.
+// It will also add an entry for each of the named aliases.
 
 cli_option cli_options[] = {
   { 'c', "msgcount", cli_option::integer, 0, &o_msgcount,
     "Set the user's message count limit", 0 },
-  { 'D', "no-mailbox", cli_option::flag, false, &o_domailbox,
-    "Don't create a mailbox for this user", "true for vaddalias" },
+  { 'D', "no-mailbox", cli_option::flag, false, &o_hasmailbox,
+    "Do not create a mailbox for this user", "true for vaddalias" },
   { 'd', "directory", cli_option::string, 0, &o_userdir,
     "Set the path to the user's mailbox", 0 },
+  // Set the path to the user's mailbox.
+  // Note that this directory is unconditionally prefixed with "./".
   { 'e', "expiry", cli_option::integer, 0, &o_expiry,
     "Set the account's expiry time (in seconds)", 0 },
   { 'f', "forward", cli_option::stringlist, 0, &o_forwards,
-    "Add a forwarding address for this user", 0 },
+    "Add a forwarding address to this user", 0 },
+  // Add a forwarding address to this user (this may be used multiple times).
+  { 0,   "password",    cli_option::string, 0, &o_pwcrypt,
+    "Encrypted password", "asking for a password" },
   { 'P', "no-password", cli_option::flag, false, &o_password,
     "Do not ask for a password", 0 },
+  // Do not ask for a password,
+  // and instead set the pass phrase field to an unusable value.
   { 'p', "personal", cli_option::string, 0, &o_personal,
     "Set the user's personal information", 0 },
   { 'Q', "hardquota", cli_option::integer, 0, &o_hardquota,
@@ -67,12 +84,28 @@ cli_option cli_options[] = {
     "Set the user's soft quota (in bytes)", 0 },
   { 0, "quiet", cli_option::flag, true, &o_quiet,
     "Suppress all status messages", 0 },
-  //{ 'x', "extra", cli_option::stringlist, 0, &o_extra,
-  //  "Add extra data for the user", 0 },
   { 'z', "msgsize", cli_option::integer, 0, &o_msgsize,
     "Set the user's message size limit (in bytes)", 0 },
   {0}
 };
+
+// RETURN VALUE
+//
+// 0 if all steps were successful, non-zero otherwise.
+// If any of the steps fail, a diagnostic message is printed.
+
+// SEE ALSO
+//
+// vsetup(1)
+
+// NOTES
+// You must have either created the users subdirectory by hand or run the
+// F<vsetup> program before using this program.
+// 
+// This program expects the environment variable C<HOME> to be set, and
+// executes a change directory to the contents of it before starting.  It
+// is also required that you change user to the domain owner before using
+// these utilities.
 
 mystring list2str(cli_stringlist* list)
 {
@@ -90,13 +123,11 @@ mystring list2str(cli_stringlist* list)
 vpwentry* make_user(const mystring& name, const mystring& passcode)
 {
   mystring dir;
-  if(o_domailbox) {
-    if(o_userdir)
-      dir = o_userdir;
-    else
-      dir = domain.userdir(name);
-    dir = "./" + dir;
-  }
+  if(o_userdir)
+    dir = o_userdir;
+  else
+    dir = domain.userdir(name);
+  dir = "./" + dir;
 
   for(cli_stringlist* node = o_forwards; node; node = node->next) {
     response r = domain.validate_forward(node->string);
@@ -109,9 +140,7 @@ vpwentry* make_user(const mystring& name, const mystring& passcode)
   }
   
   vpwentry* vpw = new vpwentry(name.lower(), passcode, dir,
-			       list2str(o_forwards));
-  vpw->set_defaults(true, true);
-  
+			       list2str(o_forwards), o_hasmailbox);
   vpw->personal = o_personal;
   vpw->hardquota = o_hardquota;
   vpw->softquota = o_softquota;
@@ -126,15 +155,19 @@ vpwentry* make_user(const mystring& name, const mystring& passcode)
 void add_user(const mystring& user)
 {
   if(!domain.exists(user)) {
-    mystring passcode = "*";
-    if(o_password) {
+    mystring passcode;
+    if(o_pwcrypt)
+      passcode = o_pwcrypt;
+    else if(o_password) {
       mystring passwd = getpasswd(argv0base);
       if(passwd.length() == 0)
 	exit(1);
       passcode = pwcrypt(passwd);
     }
+    else
+      passcode = "*";
     vpwentry* vpw = make_user(user, passcode);
-    response resp = domain.set(vpw, true, vpw->mailbox);
+    response resp = domain.set(vpw, true);
     delete vpw;
     if(!resp) {
       if(!o_quiet)
@@ -155,8 +188,7 @@ void add_alias(mystring user, mystring alias)
   alias = alias.lower();
   user = user.lower();
   if(!domain.exists(alias)) {
-    vpwentry vpw(alias, "*", 0, user);
-    vpw.set_defaults(true, true);
+    vpwentry vpw(alias, "*", domain.userdir(alias), user, false);
     response resp = domain.set(&vpw, true);
     if(!resp)
       if(!o_quiet)
@@ -178,7 +210,7 @@ void add_alias(mystring user, mystring alias)
 void set_defaults()
 {
   if(!strcmp(argv0base, "vaddalias"))
-    o_domailbox = false;
+    o_hasmailbox = false;
   if(!o_hardquota)
     o_hardquota = config->default_hardquota();
   if(!o_softquota)

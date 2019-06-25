@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ response lookup_and_validate(const mystring& fullname,
     RETURN(err, "User name does not refer to a virtual user");
   state = new saved_state(pw);
   if(mustexist) {
-    vpw = state->domain.lookup(virtname, true);
+    vpw = state->domain.lookup(virtname);
     if(!vpw)
       RETURN(err, "Invalid or unknown virtual user");
     else if(!passok && !vpw->authenticate(password))
@@ -49,12 +49,11 @@ response lookup_and_validate(const mystring& fullname,
       RETURN(ok, "");
   }
   else {			// user must not already exist
-    vpw = state->domain.lookup(virtname, true);
+    vpw = state->domain.lookup(virtname);
     if(vpw)
       RETURN(err, "Virtual user already exists");
     else {
-      vpw = new vpwentry(virtname, "*", 0, 0);
-      vpw->set_defaults(true, true);
+      vpw = new vpwentry(virtname, "*", 0, 0, false);
       RETURN(ok, "");
     }
   }

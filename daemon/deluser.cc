@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -30,5 +30,5 @@ CMD(deluser)
   pwentry* pw;
   vpwentry* vpw;
   OK_RESPONSE(lookup_and_validate(fulluser, pw, vpw, adminpass));
-  return state->domain.deluser(vpw->name);
+  return state->domain.deluser(vpw->name, true);
 }

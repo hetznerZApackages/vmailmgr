@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ static int presetenv(const char* prefix, unsigned value)
 bool vpwentry::export_env() const
 {
   return presetenv("VUSER=", name) == 0 &&
-    presetenv("MAILDIR=", mailbox) == 0 &&
+    presetenv("MAILDIR=", directory) == 0 &&
     presetenv("VUSER_CTIME=", ctime) == 0 &&
     presetenv("VUSER_EXPIRY=", expiry) == 0 &&
     presetenv("VUSER_MSGCOUNT=", msgcount) == 0 &&
@@ -35,6 +35,7 @@ bool vpwentry::export_env() const
     presetenv("VUSER_PERSONAL=", personal) == 0 &&
     presetenv("VUSER_HARDQUOTA=", hardquota) == 0 &&
     presetenv("VUSER_SOFTQUOTA=", softquota) == 0 &&
+    presetenv("VUSER_HAS_MAILBOX=", has_mailbox) == 0 &&
     presetenv("VUSER_MAILBOX_ENABLED=", is_mailbox_enabled) == 0;
   //for(mystring_iter iter(data.str(), '\0'); iter; ++iter)
   //  presetenv("VUSER_"+...+"=", *iter);

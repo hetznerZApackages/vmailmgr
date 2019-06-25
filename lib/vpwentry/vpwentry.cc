@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
+// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,15 +18,16 @@
 #include "vpwentry.h"
 
 vpwentry::vpwentry()
-  : is_mailbox_enabled(true)
+  : has_mailbox(true), is_mailbox_enabled(true)
 {
 }
 
 vpwentry::vpwentry(const mystring& n, const mystring& p,
-		   const mystring& m, const mystring& f)
-  : name(n), pass(p), mailbox(m), forwards(f),
-    is_mailbox_enabled(true)
+		   const mystring& d, const mystring& f, bool m)
+  : name(n), pass(p), directory(d), forwards(f),
+    has_mailbox(m), is_mailbox_enabled(true)
 {
+  set_defaults(true, true);
 }
 
 vpwentry::~vpwentry()
