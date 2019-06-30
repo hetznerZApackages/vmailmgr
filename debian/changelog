@@ -1,8 +1,14 @@
+vmailmgr (1:0.97.1+deb9hetz1~exp4) stretch-hetz-experimental; urgency=low
+
+  * Remove quilt source format
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:45:26 +0200
+
 vmailmgr (1:0.97.1+deb9hetz1~exp3) stretch-hetz-experimental; urgency=low
 
   * Add quilt source format
 
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:34:29 +0200
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:45:26 +0200
 
 vmailmgr (1:0.97.1+deb9hetz1~exp2) stretch-hetz-experimental; urgency=low
 
