@@ -22,7 +22,8 @@ endif
 
 include /usr/share/quilt/quilt.make
 
-config.status: configure-stamp configure
+config.status: configure
+	dh_quilt_patch
 	dh_testdir
 	# Add here commands to configure the package.
 ifneq "$(wildcard /usr/share/misc/config.sub)" ""
@@ -46,6 +47,7 @@ build-stamp:  config.status
 	touch $@
 
 clean: unpatch
+	dh_quilt_patch
 	dh_testdir
 	dh_testroot
 	rm -f build-stamp 
