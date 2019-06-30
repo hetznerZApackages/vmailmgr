@@ -7,4 +7,4 @@ export LINUX_CFLAGS='-DLINUX  -D_XOPEN_SOURCE -D_BSD_SOURCE'
 	dh $@ --with quilt
 
 # Commands not to run:
-	override_dh_installinfo
+override_dh_installinfo:
