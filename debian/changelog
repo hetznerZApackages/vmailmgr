@@ -1,9 +1,15 @@
+vmailmgr (1:0.97.1+deb9hetz1~exp2) stretch-hetz-experimental; urgency=low
+
+  * Convert patches from dpatch to quilt
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:32:00 +0200
+
 vmailmgr (1:0.97.1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
 
   * Initial Stretch version - replaced source_code with  https://github.com/bruceg/vmailmgr
   * deleted unapplyable patches
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Tue, 25 Jun 2019 16:00:00 +0200
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:32:00 +0200
 
 vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 
