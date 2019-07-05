@@ -1,7 +1,7 @@
 #!/usr/bin/make -f
 # -*- makefile -*-
 # Uncomment this to turn on verbose mode.
-#export DH_VERBOSE=1
+export DH_VERBOSE=1
 export LINUX_CFLAGS='-DLINUX  -D_XOPEN_SOURCE -D_BSD_SOURCE'
 %:
 	dh $@ --with quilt
