@@ -104,14 +104,14 @@ auth_data* getdata()
   return new auth_data(name, pass, stamp);
 }
 
-char* strcasestr(const char* haystack, const char* needle)
-{
-  for(size_t hlength = strlen(haystack), nlength = strlen(needle);
-      hlength >= nlength; hlength--, haystack++)
-    if(!strncasecmp(haystack, needle, nlength))
-      return (char*)haystack;
-  return 0;
-}
+//char* strcasestr(const char* haystack, const char* needle)
+//{
+//  for(size_t hlength = strlen(haystack), nlength = strlen(needle);
+//      hlength >= nlength; hlength--, haystack++)
+//    if(!strncasecmp(haystack, needle, nlength))
+//      return (char*)haystack;
+//  return 0;
+//}
 
 unsigned find_maildir(int argc, const char* args[])
 {
