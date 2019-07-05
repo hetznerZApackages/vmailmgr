@@ -22,7 +22,7 @@ AM_CONDITIONAL(KRB5, test x$with_krb5 != x -a x$with_krb5 != xno)
 AC_ARG_WITH(vpwtable,
 [  --with-vpwtable=type    Use "type" database for storage of virtual
                            password tables.  Defaults to "cdb".],
-AM_CONDITIONAL(VPWTABLE_GDBM, false)
+VPWTABLE_GDBM = false
 [case "${withval}" in
  gdbm)	AC_DEFINE(VPWTABLE_GDBM)
 	AM_CONDITIONAL(VPWTABLE_GDBM, true)
