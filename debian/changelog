@@ -1,33 +1,6 @@
-vmailmgr (1:0.97.1+deb9hetz1~exp5) stretch-hetz-experimental; urgency=low
+vmailmgr (1:0.96.9-1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
 
-  * Tweaking debian/rules to get compilation to work
-
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:52:55 +0200
-
-vmailmgr (1:0.97.1+deb9hetz1~exp4) stretch-hetz-experimental; urgency=low
-
-  * Remove quilt source format
-
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:52:55 +0200
-
-vmailmgr (1:0.97.1+deb9hetz1~exp3) stretch-hetz-experimental; urgency=low
-
-  * Add quilt source format
-
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:45:26 +0200
-
-vmailmgr (1:0.97.1+deb9hetz1~exp2) stretch-hetz-experimental; urgency=low
-
-  * Convert patches from dpatch to quilt
-
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:34:29 +0200
-
-vmailmgr (1:0.97.1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
-
-  * Initial Stretch version - replaced source_code with  https://github.com/bruceg/vmailmgr
-  * deleted unapplyable patches
-
- -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 30 Jun 2019 08:32:00 +0200
+  * Initial stretch release
 
 vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 

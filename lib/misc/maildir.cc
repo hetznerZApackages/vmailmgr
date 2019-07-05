@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -15,7 +15,6 @@
 // Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #include <config.h>
-#include <errno.h>
 #include "maildir.h"
 #include <unistd.h>
 #include <string.h>
@@ -37,9 +36,7 @@ int mkdirp(const mystring& dirname, mode_t mode)
     if(mkdirp(dirname.left(i), 0755))
       return -1;
   }
-  if(i != dirname.length() - 1)
-    return mkdir(dirname.c_str(), mode);
-  return 0;
+  return mkdir(dirname.c_str(), mode);
 }
 
 bool make_maildir(const mystring& dirname)
@@ -47,18 +44,18 @@ bool make_maildir(const mystring& dirname)
   if(mkdirp(dirname, 0700))
     return false;
   mystring curdir = dirname + "/cur";
-  if(mkdir(curdir.c_str(), 0755) && (errno != EEXIST)) {
+  if(mkdir(curdir.c_str(), 0755)) {
     rmdir(dirname);
     return false;
   }
   mystring newdir = dirname + "/new";
-  if(mkdir(newdir.c_str(), 0755) && (errno != EEXIST)) {
+  if(mkdir(newdir.c_str(), 0755)) {
     rmdir(curdir);
     rmdir(dirname);
     return false;
   }
   mystring tmpdir = dirname + "/tmp";
-  if(mkdir(tmpdir.c_str(), 0755) && (errno != EEXIST)) {
+  if(mkdir(tmpdir.c_str(), 0755)) {
     rmdir(newdir);
     rmdir(curdir);
     rmdir(dirname);
@@ -69,35 +66,28 @@ bool make_maildir(const mystring& dirname)
 
 bool delete_directory(const mystring& dirname)
 {
-  int retry;
-  retry = 0;
-  do {
-    DIR* dir = opendir(dirname.c_str());
-    if(!dir)
-      return false;
-    while(dirent* entry = readdir(dir)) {
-      const char* name = entry->d_name;
-      if(name[0] == '.' &&
-	 (NAMLEN(entry) == 1 ||
-	  (name[1] == '.' && NAMLEN(entry) == 2)))
-	continue;
-      mystring fullname = dirname + "/";
-      fullname += mystring(name, NAMLEN(entry));
-      if(is_dir(fullname.c_str())) {
-	if(!delete_directory(fullname)) {
-	  closedir(dir);
-	  return false;
-	}
-      }
-      else if(unlink(fullname.c_str())) {
+  DIR* dir = opendir(dirname.c_str());
+  if(!dir)
+    return false;
+  while(dirent* entry = readdir(dir)) {
+    const char* name = entry->d_name;
+    if(name[0] == '.' &&
+       (NAMLEN(entry) == 1 ||
+	(name[1] == '.' && NAMLEN(entry) == 2)))
+      continue;
+    mystring fullname = dirname + "/";
+    fullname += mystring(name, NAMLEN(entry));
+    if(is_dir(fullname.c_str())) {
+      if(!delete_directory(fullname)) {
 	closedir(dir);
 	return false;
       }
     }
-    closedir(dir);
-    if (rmdir(dirname) == 0)
-      return true;
-    ++retry;
-  } while (retry < 3);
-  return false;
+    else if(unlink(fullname.c_str())) {
+      closedir(dir);
+      return false;
+    }
+  }
+  closedir(dir);
+  return !rmdir(dirname);
 }

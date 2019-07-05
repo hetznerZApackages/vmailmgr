@@ -1,5 +1,5 @@
 noinst_LIBRARIES = libfdbuf.a
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 
 if FDBUF_NO_MYSTRING
 mystring_sources =

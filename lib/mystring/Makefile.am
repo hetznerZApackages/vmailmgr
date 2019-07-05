@@ -1,7 +1,7 @@
 noinst_LIBRARIES = libmystring.a
 EXTRA_DIST = ChangeLog iter.h join.h mystring.h rep.h trace.h
 
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 
 libmystring_a_SOURCES = \
 	append.cc \

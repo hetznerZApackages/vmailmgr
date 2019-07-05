@@ -1,6 +1,6 @@
 noinst_LIBRARIES = libcgi.a
 
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 
 libcgi_a_SOURCES = \
 	cgi-args.h cgi-args.cc \

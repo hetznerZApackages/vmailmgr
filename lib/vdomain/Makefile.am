@@ -1,5 +1,5 @@
 noinst_LIBRARIES = libvdomain.a
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 EXTRA_DIST = vdomain.h
 
 libvdomain_a_SOURCES = \

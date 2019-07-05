@@ -18,7 +18,7 @@
 
 #include	"auth.h"
 
-static const char rcsid[]="$Id: chain.c,v 1.2 2000/12/18 20:20:10 bruce Exp $";
+static const char rcsid[]="$Id: chain.c,v 1.1 2000/04/13 17:55:05 bruce Exp $";
 
 void authchain(int argc, char **argv, const char *buf)
 {
@@ -29,7 +29,6 @@ char	**vec;
 char	*prog;
 
 	vec=authcopyargv(argc, argv, &prog);
-	close(3);
 	if (!prog || open("/dev/null", O_RDONLY) != 3)	authexit(1);
 
 	if (pipe(pipes))
@@ -54,6 +53,7 @@ char	*prog;
 		authexit(1);
 	}
 	l=strlen(buf);
+	close(3);
 	close(pipes[0]);
 	while (l)
 	{

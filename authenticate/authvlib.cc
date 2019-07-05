@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -69,29 +69,31 @@ static user_data* check(mystring fulluser, mystring password,
 {
   mystring virtname;
   pwentry* basepw;
-  if(!lookup_baseuser(fulluser, basepw, virtname))
-    fail_login("Invalid or unknown base user or domain");
-  presetenv("VUSER=", virtname);
-  if(!virtname) {
+  if(!lookup_baseuser(fulluser, basepw, virtname)) {
     if(virtual_only)
       return 0;
-    if(!basepw->authenticate(password))
-      fail_login("Invalid or incorrect password");
-    set_user(basepw);
-    return new user_data(basepw, "", "");
+    else
+      fail_login("Invalid or unknown base user or domain");
   }
-  else {
-    set_user(basepw);
-    vpwentry* vpw = domain->lookup(virtname);
-    if(!vpw || !vpw->has_mailbox)
+  presetenv("VUSER=", virtname);
+  set_user(basepw);
+  vpwentry* vpw = 0;
+  if(!!virtname) {
+    vpw = domain->lookup(virtname, true);
+    if(!vpw || !vpw->mailbox)
       fail_login("Invalid or unknown virtual user");
     if(!vpw->authenticate(password))
       fail_login("Invalid or incorrect password");
     if(vpw->expiry < (unsigned)time(0))
       fail_login("Account has expired");
     vpw->export_env();
-    return new user_data(basepw, vpw->directory, vpw->name);
+    return new user_data(basepw, vpw->mailbox, vpw->name);
   }
+  if(virtual_only)
+    return 0;
+  if(!basepw->authenticate(password))
+    fail_login("Invalid or incorrect password");
+  return new user_data(basepw, "", "");
 }
 
 user_data* authenticate(mystring name, mystring pass, mystring domain,

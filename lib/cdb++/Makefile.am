@@ -1,7 +1,7 @@
 noinst_LIBRARIES = libcdb++.a
 EXTRA_DIST = ChangeLog cdbtest.cc
 
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 
 test: cdbtest
 cdbtest: cdbtest.o libcdb++.a

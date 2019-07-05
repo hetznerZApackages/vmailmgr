@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -59,24 +59,23 @@ user::user(const mystring& n, const mystring& c)
 
 void show_user(const user* user)
 {
-  vpwentry* vpw = vpwentry::new_from_record(user->name, user->code);
+  vpwentry vpw;
+  vpw.from_record(user->name, user->code);
   
   mystring link;
   mystring elink;
 
   if(!!userlink) {
-    link = "<a href=\"" + do_subst(userlink, vpw->name) + "\">";
+    link = "<a href=\"" + do_subst(userlink, vpw.name) + "\">";
     elink = "</a>";
   }
   
   fout << "<tr>"
-       << cell_pre << link << vpw->name << elink << cell_post
-       << cell_pre
-       << (vpw->has_mailbox ? vpw->directory.c_str() : "") << cell_post;
-  for(mystring_iter iter = vpw->forwards; iter; ++iter)
+       << cell_pre << link << vpw.name << elink << cell_post
+       << cell_pre << vpw.mailbox << cell_post;
+  for(mystring_iter iter = vpw.forwards; iter; ++iter)
     fout << cell_pre << *iter << cell_post;
   fout << "</tr>\n";
-  delete vpw;
 }
 
 mystring load_users(int fd, unsigned& count, user**& array)

@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -37,8 +37,15 @@ bool vdomain::exists(mystring name)
   return table()->exists(name);
 }
 
-vpwentry* vdomain::lookup(mystring name)
+vpwentry* vdomain::lookup(mystring name, bool nodefault)
 {
-  if(!name) return 0;
-  return table()->getbyname(name);
+  vpwentry* vpw;
+  if(!name)
+    vpw = 0;
+  else {
+    vpw = table()->getbyname(name);
+    if(!vpw && !nodefault)
+      vpw = table()->getbyname(config.default_username());
+  }
+  return vpw;
 }

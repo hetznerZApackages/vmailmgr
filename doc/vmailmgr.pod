@@ -46,7 +46,7 @@ vsetup(1)
 
 =head1 AUTHOR
 
-Bruce Guenter <F<bruce@untroubled.org>>.
+Bruce Guenter <F<bruceg@em.ca>>.
 
 =head1 HISTORY
 

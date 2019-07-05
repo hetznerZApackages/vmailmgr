@@ -1,18 +1,18 @@
-// Copyright (C) 1999,2000,2005 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
-// This library is free software; you can redistribute it and/or
-// modify it under the terms of the GNU Lesser General Public
-// License as published by the Free Software Foundation; either
-// version 2.1 of the License, or (at your option) any later version.
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
 //
-// This library is distributed in the hope that it will be useful,
+// This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-// Lesser General Public License for more details.
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-// You should have received a copy of the GNU Lesser General Public
-// License along with this library; if not, write to the Free Software
-// Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 #ifndef CDBXX__CDBXX__H__
 #define CDBXX__CDBXX__H__
@@ -21,22 +21,23 @@
 #include "cdb++/datum.h"
 #include "fdbuf/fdbuf.h"
 
-typedef unsigned uint32;
+typedef unsigned long uint32;
 
 #define CDBMAKE_HPLIST 1000
 
 class cdb_reader
 {
 private:
-  unsigned char* map;
-  size_t size;
-  unsigned char* ptr;
-  unsigned char* eod;
+  fdibuf in;
+  uint32 eod;
+  uint32 pos;
   bool failed;
   bool eof;
 
+  unsigned char header[2048];
+  
   void abort();
-  char* seek(const mystring& key, uint32& len);
+  int seek(const mystring& key, uint32& len);
 public:
   cdb_reader(const mystring& filename);
   ~cdb_reader();

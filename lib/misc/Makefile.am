@@ -1,5 +1,5 @@
 noinst_LIBRARIES = libmisc.a
-AM_CPPFLAGS = -I..
+INCLUDES = -I..
 EXTRA_DIST = autodelete.h debug.h hash_table.h krbauth.c stat_fns.h
 
 if KRB5

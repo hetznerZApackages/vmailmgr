@@ -1,4 +1,4 @@
-// Copyright (C) 2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 
 #include <config.h>
 #include <errno.h>
-#include <stdlib.h>
 #include <unistd.h>
 #include "authvlib.h"
 #include "fdbuf/fdbuf.h"

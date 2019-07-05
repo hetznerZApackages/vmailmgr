@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -16,7 +16,6 @@
 
 #include <config.h>
 #include "vpwtable.h"
-#include <gdbm.h>
 
 vpwentry* vpwtable::getbyname(const mystring& name) const
 {
@@ -27,5 +26,8 @@ vpwentry* vpwtable::getbyname(const mystring& name) const
   datum key = { (char*)lower.c_str(), lower.length() };
   datum result = gdbm_fetch(db, key);
   gdbm_close(db);
-  return vpwentry::new_from_record(name, mystring(result.dptr, result.dsize));
+  vpwentry v;
+  if(!v.from_record(name, mystring(result.dptr, result.dsize)))
+    return 0;
+  return new vpwentry(v);
 }

@@ -4,27 +4,35 @@
 #include "mystring/mystring.h"
 #include "misc/strlist.h"
 #include "vpwentry/vpwentry.h"
+#if VPWTABLE_CDB
+#include "cdb++/cdb++.h"
+#elif VPWTABLE_GDBM
+#include <gdbm.h>
+#endif
 
 class vdomain;
 
 class vpwtable_reader
 {
+private:
+#if VPWTABLE_CDB
+  cdb_reader cdb;
 public:
-  virtual ~vpwtable_reader();
-  virtual bool operator!() const = 0;
-  virtual vpwentry* get() = 0;
-  virtual bool rewind() = 0;
-  virtual bool end() = 0;
-};
+  vpwtable_reader(const mystring& filename);
+#elif VPWTABLE_GDBM
+  GDBM_FILE dbf;
+  datum key;
+public:
+  vpwtable_reader(const mystring& filename);
+#endif
+public:
+  inline ~vpwtable_reader() { end(); }
 
-class vpwtable_writer
-{
-public:
-  virtual ~vpwtable_writer();
-  virtual bool operator!() const = 0;
-  virtual bool put(const vpwentry& vpw) = 0;
-  virtual bool end() = 0;
-  virtual bool abort() = 0;
+  bool operator!() const;
+
+  bool get(vpwentry& out);
+  bool rewind();
+  bool end();
 };
 
 class vpwtable
@@ -38,8 +46,7 @@ public:
   ~vpwtable();
 
   vpwtable_reader* start_read() const;
-  vpwtable_writer* start_write() const;
-  
+
   vpwentry* getbyname(const mystring& name) const;
   bool exists(const mystring& name) const;
   

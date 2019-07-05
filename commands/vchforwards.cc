@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -18,32 +18,25 @@
 #include "fdbuf/fdbuf.h"
 #include "mystring/mystring.h"
 #include "config/configrc.h"
-#include "cli++/cli++.h"
+#include "cli/cli.h"
 #include "vcommand.h"
 
 const char* cli_program = "vchforwards";
 const char* cli_help_prefix =
-"Change virtual user forwarding addresses.\n";
-const char* cli_help_suffix =
+"Changes a virtual user's forwarding addresses.\n"
 "If no forwarding addresses are given, forwarding is disabled.\n";
+const char* cli_help_suffix = "";
 const char* cli_args_usage = "USERNAME [DESTINATION1 ...]";
 const int cli_args_min = 1;
 const int cli_args_max = -1;
 
 static int o_quiet = false;
 
-// This program replaces the virtual user's list of forwarding addresses
-// with the given list.
-
 cli_option cli_options[] = {
   { 0, "quiet", cli_option::flag, true, &o_quiet,
     "Suppress all status messages", 0 },
   {0}
 };
-
-// SEE ALSO
-//
-// vmailmgr(7)
 
 int cli_main(int argc, char* argv[])
 {
@@ -53,7 +46,7 @@ int cli_main(int argc, char* argv[])
   mystring username = argv[0];
   username = username.lower();
   
-  vpwentry* vpw = domain.lookup(username);
+  vpwentry* vpw = domain.lookup(username, false);
   if(!vpw) {
     if(!o_quiet)
       ferr << "vchforwards: User '" << username << "' does not exist." << endl;

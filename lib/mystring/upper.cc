@@ -8,8 +8,8 @@ mystring mystring::upper() const
   const char* in = rep->buf + length;
   bool changed = false;
   for(char* out = buf+length; out >= buf; in--, out--)
-    if(islower(*in)) {
-      *out = toupper(*in);
+    if(isupper(*in)) {
+      *out = tolower(*in);
       changed = true;
     }
     else

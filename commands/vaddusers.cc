@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 #include "mystring/mystring.h"
 #include "misc/pwcrypt.h"
 #include "config/configrc.h"
-#include "cli++/cli++.h"
+#include "cli/cli.h"
 #include "vcommand.h"
 
 const char* cli_program = "vaddusers";
@@ -33,35 +33,11 @@ const int cli_args_max = 0;
 
 static int o_quiet = false;
 
-// This program is used to set up a list of users within a virtual host.
-// The list is taken from standard input.
-// Each line in the list contains the user name, pass phrase, and an
-// optional list of aliases, all seperated by whitespace.
-// It will attempt to add each listed user to the virtual password table
-// and to create a mail directory for the new user, as well as attempting
-// to add entries for each of the named aliases.
-// If any step fails, the remainder of that line is ignored and
-// processing continues.
-
 cli_option cli_options[] = {
   { 0, "quiet", cli_option::flag, true, &o_quiet,
     "Suppress all status messages", 0 },
   {0}
 };
-
-// NOTES
-//
-// You must have either created the users subdirectory by hand or run the
-// F<vsetup> program before using this program.
-//
-// This program expects the environment variable C<HOME> to be set, and
-// executes a change directory to the contents of it before starting.  It
-// is also required that you change user to the domain owner before using
-// these utilities.
-
-// SEE ALSO
-//
-// vadduser(1), vsetup(1)
 
 static int errors = 0;
 
@@ -100,8 +76,9 @@ void add_one(const mystring& line)
   }
   {
     mystring maildir = domain.userdir(user);
-    vpwentry vpw(user, pwcrypt(pass), maildir, 0, true);
-    response resp = domain.set(&vpw, true);
+    vpwentry vpw(user, pwcrypt(pass), maildir, 0);
+    vpw.set_defaults(true, true);
+    response resp = domain.set(&vpw, true, maildir);
     if(!resp) {
       errors++;
       if(!o_quiet)
@@ -125,7 +102,8 @@ void add_one(const mystring& line)
 	     << "' already exists, skipping." << endl;
       continue;
     }
-    vpwentry vpw(alias, "*", 0, user, false);
+    vpwentry vpw(alias, "*", 0, user);
+    vpw.set_defaults(true, true);
     response resp = domain.set(&vpw, true);
     if(!resp) {
       fout << endl;

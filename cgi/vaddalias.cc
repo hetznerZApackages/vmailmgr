@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -33,15 +33,14 @@ CGI_MAIN
     mystring errmsg;
     unsigned dests = destination.count(',') + 1;
 
-    server_call call("adduser3", dests + 6);
+    server_call call("adduser2", dests + 5);
     call.operand(0, vdomain);
     call.operand(1, username);
     call.operand(2, password);
     call.operand(3, newpass1);
     call.operand(4, "");
-    call.operand(5, "");
     
-    unsigned i = 6;
+    unsigned i = 5;
     for(mystring_iter iter(destination, ','); iter; ++iter, ++i)
       call.operand(i, *iter);
 

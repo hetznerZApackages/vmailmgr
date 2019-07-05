@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -20,14 +20,12 @@
 
 // declare the commands
 extern CMD(adduser2);
-extern CMD(adduser3);
 extern CMD(autoresponse);
 extern CMD(chattr);
 extern CMD(check);
 extern CMD(deluser);
 extern CMD(listdomain);
 extern CMD(lookup);
-extern CMD(stat);
 
 #ifdef TEST_DAEMON
 CMD(echo)
@@ -70,11 +68,9 @@ dispatch dispatch_table[] = {
   ENTRY(lookup,       3,  3, true),
   ENTRY(check,        3,  3, true),
   ENTRY(chattr,       5, -1, true),
-  ENTRY(adduser2,     4, -1, true),
-  ENTRY(adduser3,     5, -1, true),
+  ENTRY(adduser2,     5, -1, true),
   ENTRY(autoresponse, 4,  5, true),
   ENTRY(deluser,      3,  3, true),
-  ENTRY(stat,         3,  3, true),
   ENTRY(listdomain,   2,  2, false),
 #ifdef TEST_DAEMON
   ENTRY(echo,         0, -1, false), // For testing purposes only
@@ -138,8 +134,6 @@ response dispatch_cmd(command& args, int fd)
 	mystring baseuser(find_virtual(args[0]));
 	if(baseuser.empty())
 	  RETURN(err, "Invalid or unknown domain name: " + args[0]);
-	else if(!args[1])
-	  args.replace_first_two(baseuser);
 	else
 	  args.replace_first_two(baseuser + "-" + args[1]);
       }

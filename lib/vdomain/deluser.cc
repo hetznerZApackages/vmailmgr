@@ -1,4 +1,4 @@
-// Copyright (C) 1999,2000 Bruce Guenter <bruce@untroubled.org>
+// Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -19,17 +19,15 @@
 #include "misc/autodelete.h"
 #include "misc/maildir.h"
 
-response vdomain::deluser(mystring user, bool del_mailbox)
+response vdomain::deluser(mystring user)
 {
   user = user.lower();
   autodelete<vpwentry> vpw = table()->getbyname(user);
   if(!vpw)
     RETURN(err, "User does not exist");
-  if(!del_mailbox && vpw->has_mailbox)
-    RETURN(err, "User has a mailbox");
   if(!table()->del(vpw->name))
     RETURN(err, "Couldn't delete user from the password file");
-  if(!!vpw->directory && !delete_directory(vpw->directory))
-    RETURN(err, "Couldn't delete user's directory");
+  if(!!vpw->mailbox && !delete_directory(vpw->mailbox))
+    RETURN(err, "Couldn't delete user's mail directory");
   RETURN(ok, "Deleted user.");
 }

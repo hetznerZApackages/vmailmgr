@@ -1,5 +1,5 @@
 // Copyright (C) 2000 Mike Bell <mike@mikebell.org>,
-// Bruce Guenter <bruce@untroubled.org>
+// Bruce Guenter <bruceg@em.ca>
 //
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -160,7 +160,7 @@ CMD_FD(autoresponse)
   vpwentry* vpw;
   OK_RESPONSE(lookup_and_validate(user, pw, vpw, pass, true, true));
 
-  const mystring directory = vpw->directory + "/" + config->autoresponse_dir();
+  const mystring directory = vpw->mailbox + "/" + config->autoresponse_dir();
   const mystring filename = directory + "/" + config->autoresponse_file();
   const mystring disabled = filename + ".disabled";
   

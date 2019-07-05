@@ -15,12 +15,10 @@ protected:
   bool from_ver2_record(const mystring& text);
   bool from_old_record(const mystring& text);
   
-  void set_defaults(bool ctime_now, bool set_flags);
-
 public:
   mystring name;
   mystring pass;
-  mystring directory;
+  mystring mailbox;
   mystring forwards;
   mystring personal;
   unsigned hardquota;
@@ -29,18 +27,11 @@ public:
   unsigned msgcount;
   unsigned ctime;
   unsigned expiry;
-  bool has_mailbox;
   bool is_mailbox_enabled;
   // keystrlist data;
   
-private:
   vpwentry();
-
-public:
-  static vpwentry* new_from_record(const mystring& name, const mystring& text);
-  
-  vpwentry(const mystring&, const mystring&, const mystring&, const mystring&,
-	   bool);
+  vpwentry(const mystring&, const mystring&, const mystring&, const mystring&);
   ~vpwentry();
 
   //mystring get(const mystring& var) const { return data.get(var); }
@@ -49,8 +40,10 @@ public:
   //    return data.set(var, val);
   //  }
 
-  bool authenticate(const mystring& phrase) const;
+  void set_defaults(bool ctime_now, bool set_flags);
 
+  bool authenticate(const mystring& phrase) const;
+  
   bool from_record(const mystring& name, const mystring& text);
   mystring to_record() const;
 

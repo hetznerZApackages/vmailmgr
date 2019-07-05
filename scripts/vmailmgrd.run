@@ -1,9 +1,0 @@
-#!/bin/sh
-umask 0
-if [ -s /etc/vmailmgr/socket-file ]; then
-  socket_file="`head -1 /etc/vmailmgr/socket-file`"
-else
-  socket_file=/tmp/.vmailmgrd
-fi
-
-exec unixserver -v -- $socket_file vmailmgrd -D -V 2>&1
