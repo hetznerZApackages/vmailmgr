@@ -853,7 +853,7 @@ if test "${with_vpwtable+set}" = set; then
   withval="$with_vpwtable"
   case "${withval}" in
  gdbm)	cat >> confdefs.h <<\EOF
-#define VPWTABLE_GDBM 1
+define VPWTABLE_GDBM 1
 EOF
 
 	
