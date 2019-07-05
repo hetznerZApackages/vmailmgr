@@ -105,7 +105,6 @@ $(ACLOCAL_M4):  configure.in  acinclude.m4
 	cd $(srcdir) && $(ACLOCAL)
 
 config.status: $(srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
-	$(SHELL) ./config.status --recheck
 $(srcdir)/configure: $(srcdir)/configure.in $(ACLOCAL_M4) $(CONFIGURE_DEPENDENCIES)
 	cd $(srcdir) && $(AUTOCONF)
 
