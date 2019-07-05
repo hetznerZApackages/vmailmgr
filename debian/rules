@@ -4,7 +4,7 @@
 export DH_VERBOSE=1
 export LINUX_CFLAGS='-DLINUX  -D_XOPEN_SOURCE -D_BSD_SOURCE'
 %:
-	dh $@ --with quilt
+	dh $@ --with quilt python2
 
 # Commands not to run:
 override_dh_installinfo:
