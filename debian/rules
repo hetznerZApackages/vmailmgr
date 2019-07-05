@@ -20,9 +20,9 @@ else
 CROSS= --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-include /usr/share/dpatch/dpatch.make
+include /usr/share/quilt/quilt.make
 
-config.status: patch-stamp configure
+config.status: patch configure
 	dh_testdir
 	# Add here commands to configure the package.
 ifneq "$(wildcard /usr/share/misc/config.sub)" ""
