@@ -2,6 +2,9 @@ vmailmgr (1:0.96.9-1+deb9hetz1~exp1) stretch-hetz-experimental; urgency=low
 
   * Initial stretch release
 
+ -- Willem Basson <willem.basson@hetzner.co.za>  Fri, 05 Jul 2019 10:08:07 +0200
+ +0200
+
 vmailmgr (1:0.96.9-1+hetz2) stretch-hetz; urgency=low
 
   * Released 1:0.96.9-1+hetz2~exp3 as 1:0.96.9-1+hetz2
