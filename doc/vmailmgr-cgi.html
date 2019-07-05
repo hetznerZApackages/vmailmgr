@@ -1,0 +1,748 @@
+<HTML>
+<HEAD>
+<!-- Created by texi2html 1.56k from vmailmgr-cgi.texi on 5 July 2000 -->
+
+<TITLE>vmailmgr CGI Documentation</TITLE>
+</HEAD>
+<BODY>
+<H1>vmailmgr CGI Documentation</H1>
+<H2>5 July 2000</H2>
+<ADDRESS>Bruce Guenter</ADDRESS>
+<P>
+<P><HR><P>
+<H1>Table of Contents</H1>
+<UL>
+<LI><A NAME="TOC1" HREF="vmailmgr-cgi.html#SEC1">1. Introduction</A>
+<UL>
+<LI><A NAME="TOC2" HREF="vmailmgr-cgi.html#SEC2">1.1 Common Form Configuration</A>
+<UL>
+<LI><A NAME="TOC3" HREF="vmailmgr-cgi.html#SEC3">1.1.1 Required Form Fields</A>
+<LI><A NAME="TOC4" HREF="vmailmgr-cgi.html#SEC4">1.1.2 Optional Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC5" HREF="vmailmgr-cgi.html#SEC5">2. listvdomain</A>
+<UL>
+<LI><A NAME="TOC6" HREF="vmailmgr-cgi.html#SEC6">2.1 Overview</A>
+<LI><A NAME="TOC7" HREF="vmailmgr-cgi.html#SEC7">2.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC8" HREF="vmailmgr-cgi.html#SEC8">2.2.1 Required Form Fields</A>
+<LI><A NAME="TOC9" HREF="vmailmgr-cgi.html#SEC9">2.2.2 Optional Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC10" HREF="vmailmgr-cgi.html#SEC10">3. vaddalias</A>
+<UL>
+<LI><A NAME="TOC11" HREF="vmailmgr-cgi.html#SEC11">3.1 Overview</A>
+<LI><A NAME="TOC12" HREF="vmailmgr-cgi.html#SEC12">3.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC13" HREF="vmailmgr-cgi.html#SEC13">3.2.1 Required Form Fields</A>
+<LI><A NAME="TOC14" HREF="vmailmgr-cgi.html#SEC14">3.2.2 Optional Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC15" HREF="vmailmgr-cgi.html#SEC15">4. vadduser</A>
+<UL>
+<LI><A NAME="TOC16" HREF="vmailmgr-cgi.html#SEC16">4.1 Overview</A>
+<LI><A NAME="TOC17" HREF="vmailmgr-cgi.html#SEC17">4.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC18" HREF="vmailmgr-cgi.html#SEC18">4.2.1 Required Form Fields</A>
+<LI><A NAME="TOC19" HREF="vmailmgr-cgi.html#SEC19">4.2.2 Optional Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC20" HREF="vmailmgr-cgi.html#SEC20">5. vchattr</A>
+<UL>
+<LI><A NAME="TOC21" HREF="vmailmgr-cgi.html#SEC21">5.1 Overview</A>
+<LI><A NAME="TOC22" HREF="vmailmgr-cgi.html#SEC22">5.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC23" HREF="vmailmgr-cgi.html#SEC23">5.2.1 Required Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC24" HREF="vmailmgr-cgi.html#SEC24">6. vchforwards</A>
+<UL>
+<LI><A NAME="TOC25" HREF="vmailmgr-cgi.html#SEC25">6.1 Overview</A>
+<LI><A NAME="TOC26" HREF="vmailmgr-cgi.html#SEC26">6.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC27" HREF="vmailmgr-cgi.html#SEC27">6.2.1 Required Form Fields</A>
+<LI><A NAME="TOC28" HREF="vmailmgr-cgi.html#SEC28">6.2.2 Optional Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC29" HREF="vmailmgr-cgi.html#SEC29">7. vdeluser</A>
+<UL>
+<LI><A NAME="TOC30" HREF="vmailmgr-cgi.html#SEC30">7.1 Overview</A>
+<LI><A NAME="TOC31" HREF="vmailmgr-cgi.html#SEC31">7.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC32" HREF="vmailmgr-cgi.html#SEC32">7.2.1 Required Form Fields</A>
+</UL>
+</UL>
+<LI><A NAME="TOC33" HREF="vmailmgr-cgi.html#SEC33">8. vpasswd</A>
+<UL>
+<LI><A NAME="TOC34" HREF="vmailmgr-cgi.html#SEC34">8.1 Overview</A>
+<LI><A NAME="TOC35" HREF="vmailmgr-cgi.html#SEC35">8.2 Form Configuration</A>
+<UL>
+<LI><A NAME="TOC36" HREF="vmailmgr-cgi.html#SEC36">8.2.1 Required Form Fields</A>
+</UL>
+</UL>
+</UL>
+<P><HR><P>
+
+
+<H1><A NAME="SEC1" HREF="vmailmgr-cgi.html#TOC1">1. Introduction</A></H1>
+
+<P>
+This is the documentation for the CGI programs for vmailmgr.
+
+
+
+
+<H2><A NAME="SEC2" HREF="vmailmgr-cgi.html#TOC2">1.1 Common Form Configuration</A></H2>
+
+<P>
+The following form fields are common to all of the vmailmgr CGI
+programs.
+
+
+
+
+<H3><A NAME="SEC3" HREF="vmailmgr-cgi.html#TOC3">1.1.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        vdomain
+<DT><STRONG>Description:</STRONG>
+<DD>
+This field specifies the name of the virtual domain under which to
+perform this operation.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=vdomain value="<VAR>domain-name</VAR>"&#62;'</SAMP>
+or
+<SAMP>`&#60;input type=text name=vdomain&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        password
+<DT><STRONG>Description:</STRONG>
+<DD>
+Unless noted below, this field specifies the password of the
+administrator for the given virtual domain.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=password name=password&#62;'</SAMP>
+</DL>
+
+
+
+<H3><A NAME="SEC4" HREF="vmailmgr-cgi.html#TOC4">1.1.2 Optional Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        error_redirect
+<DT><STRONG>Description:</STRONG>
+<DD>
+If this field is set, any operation that results in an error will be
+redirected to the given URL.
+If not set, a pre-programmed document (which includes the error message)
+will be output.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=error_redirect value="<VAR>URL</VAR>"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        redirect
+<DT><STRONG>Description:</STRONG>
+<DD>
+If this field is set, any operation that completes successfully with be
+redirected to the given URL.
+If not set, a pre-programmed document (which includes the completion
+message) will be output.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=redirect value="<VAR>URL</VAR>"&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC5" HREF="vmailmgr-cgi.html#TOC5">2. listvdomain</A></H1>
+
+
+
+<H2><A NAME="SEC6" HREF="vmailmgr-cgi.html#TOC6">2.1 Overview</A></H2>
+
+<P>
+This CGI program will list the mailboxes and aliases in a virtual domain
+in a three-column table.
+The first column lists the mailbox or alias name,
+the second column is either <SAMP>`Alias'</SAMP> or <SAMP>`Mailbox'</SAMP>,
+and the third column lists the destination.
+
+
+
+
+<H2><A NAME="SEC7" HREF="vmailmgr-cgi.html#TOC7">2.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC8" HREF="vmailmgr-cgi.html#TOC8">2.2.1 Required Form Fields</A></H3>
+
+<P>
+No additional form fields are Required.
+
+
+
+
+<H3><A NAME="SEC9" HREF="vmailmgr-cgi.html#TOC9">2.2.2 Optional Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        body-flags
+<DT><STRONG>Description:</STRONG>
+<DD>
+If present, the contents of this field is inserted into the
+<SAMP>`&#60;body&#62;'</SAMP> tag at the start of the document.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=body-flags value="bgcolor=ffffff"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        cell-align
+<DT><STRONG>Description:</STRONG>
+<DD>
+Sets the cell alignment.
+Defaults to <SAMP>`left'</SAMP>.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=cell-align value=center&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        cell-post
+<DT><STRONG>Description:</STRONG>
+<DD>
+If present, the contents of this field will be output prior to every
+<SAMP>`&#60;/td&#62;'</SAMP> tag.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=cell-post value="&#60;/font&#62;"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        cell-pre
+<DT><STRONG>Description:</STRONG>
+<DD>
+If present, the contents of this field will be output after every
+<SAMP>`&#60;td&#62;'</SAMP> tag.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=cell-pre value="&#60;font size=1 name=ariel&#62;"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        p-align
+<DT><STRONG>Description:</STRONG>
+<DD>
+Sets the default paragraph alignment.
+Defaults to <SAMP>`left'</SAMP>.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=p-align value=center&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        title-post
+<DT><STRONG>Description:</STRONG>
+<DD>
+If present, the contents of this field are output after the title text.
+Defaults to <SAMP>`&#60;/h1&#62;'</SAMP>.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=title-post value="&#60;/font&#62;"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        table-align
+<DT><STRONG>Description:</STRONG>
+<DD>
+Sets the allignment of the table listing the users.
+Defaults to <SAMP>`left'</SAMP>.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=table-align value=center&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        title-pre
+<DT><STRONG>Description:</STRONG>
+<DD>
+If present, the contents of this field are output before the title text.
+Defaults to <SAMP>`&#60;h1&#62;'</SAMP>.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=title-pre value="&#60;font size=3 face=verdana&#62;"&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        userlink
+<DT><STRONG>Description:</STRONG>
+<DD>
+If this field is present, all user names will be enclosed in a link to the
+contents of this field.  If the field contains a '%', it will be
+replaced by the user name.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=userlink value="/cgi-bin/admin-user?name=%"&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC10" HREF="vmailmgr-cgi.html#TOC10">3. vaddalias</A></H1>
+
+
+
+<H2><A NAME="SEC11" HREF="vmailmgr-cgi.html#TOC11">3.1 Overview</A></H2>
+
+<P>
+This CGI program can be used to add an alias to a virtual domain.
+
+
+
+
+<H2><A NAME="SEC12" HREF="vmailmgr-cgi.html#TOC12">3.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC13" HREF="vmailmgr-cgi.html#TOC13">3.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+The virtual user name of the alias to create.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        destination
+<DT><STRONG>Description:</STRONG>
+<DD>
+The destination address or addresses of the alias, separated by commas.
+If an address does not contain a host name (separated from the user name
+with an <SAMP>`@'</SAMP>), it is treated as local to the virtual domain and
+must already exist.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=destination&#62;'</SAMP>
+</DL>
+
+
+
+<H3><A NAME="SEC14" HREF="vmailmgr-cgi.html#TOC14">3.2.2 Optional Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        newpass1, newpass2
+<DT><STRONG>Description:</STRONG>
+<DD>
+These two fields specify the new password of the user. They must match
+for the password to be changed. The first eight characters are relevant,
+and may be any combination of letters, digits, or punctuation symbols.
+If these fields are not present or are empty, a null passcode is used.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=password name=newpass1&#62;&#60;input type=password name=newpass1&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC15" HREF="vmailmgr-cgi.html#TOC15">4. vadduser</A></H1>
+
+
+
+<H2><A NAME="SEC16" HREF="vmailmgr-cgi.html#TOC16">4.1 Overview</A></H2>
+
+<P>
+This CGI program can be used to add a user mailbox to a virtual domain.
+
+
+
+
+<H2><A NAME="SEC17" HREF="vmailmgr-cgi.html#TOC17">4.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC18" HREF="vmailmgr-cgi.html#TOC18">4.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+The virtual user name of the alias to create.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        newpass1, newpass2
+<DT><STRONG>Description:</STRONG>
+<DD>
+These two fields specify the new password of the user. They must match
+for the password to be changed. The first eight characters are relevant,
+and may be any combination of letters, digits, or punctuation symbols.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=password name=newpass1&#62;&#60;input type=password name=newpass1&#62;'</SAMP>
+</DL>
+
+
+
+<H3><A NAME="SEC19" HREF="vmailmgr-cgi.html#TOC19">4.2.2 Optional Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        destination
+<DT><STRONG>Description:</STRONG>
+<DD>
+The destination address or addresses to direct a copy of incoming mail,
+separated by commas.
+If an address does not contain a host name (separated from the user name
+with an <SAMP>`@'</SAMP>), it is treated as local to the virtual domain and
+must already exist.
+If this field is not present or blank, no forwarding will be done.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=destination&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        userdir
+<DT><STRONG>Description:</STRONG>
+<DD>
+This field can be used to specify the user mail directory name relative
+to the virtual domain's users directory.
+If this field is not present, the directory name will be the same as the
+user name.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=userdir&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC20" HREF="vmailmgr-cgi.html#TOC20">5. vchattr</A></H1>
+
+
+
+<H2><A NAME="SEC21" HREF="vmailmgr-cgi.html#TOC21">5.1 Overview</A></H2>
+
+<P>
+This CGI program can be used to change the attributes of an existing
+user in a virtual domain.
+
+
+
+
+<H2><A NAME="SEC22" HREF="vmailmgr-cgi.html#TOC22">5.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC23" HREF="vmailmgr-cgi.html#TOC23">5.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+The virtual user name to modify.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        attribute
+<DT><STRONG>Description:</STRONG>
+<DD>
+The number of the attribute to modify.
+The possible values are:
+<DL COMPACT>
+
+<DT><SAMP>`1'</SAMP>
+<DD>
+The password.
+Use the <TT>`vpasswd'</TT> CGI to do this.
+<DT><SAMP>`2'</SAMP>
+<DD>
+The forwarding destination.
+Use the <TT>`vchforwards'</TT> to do this.
+<DT><SAMP>`3'</SAMP>
+<DD>
+The hard quota.
+<DT><SAMP>`4'</SAMP>
+<DD>
+The soft quota.
+<DT><SAMP>`5'</SAMP>
+<DD>
+The message size limit.
+<DT><SAMP>`6'</SAMP>
+<DD>
+The message count limit.
+<DT><SAMP>`7'</SAMP>
+<DD>
+The account's expiry time.
+<DT><SAMP>`8'</SAMP>
+<DD>
+Set to zero to disable delivery to the account's mailbox (without
+deleting the account).
+Set to non-zero to enable delivery.
+<DT><SAMP>`9'</SAMP>
+<DD>
+The personal information string.
+</DL>
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=hidden name=attribute value=2&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        newvalue
+<DT><STRONG>Description:</STRONG>
+<DD>
+The new value for the given attribute.
+The format of this new value is dependant on the type of the attribute.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=newvalue&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC24" HREF="vmailmgr-cgi.html#TOC24">6. vchforwards</A></H1>
+
+
+
+<H2><A NAME="SEC25" HREF="vmailmgr-cgi.html#TOC25">6.1 Overview</A></H2>
+
+<P>
+This CGI program can be used to change the forwarding destination of an
+existing user.
+
+
+
+
+<H2><A NAME="SEC26" HREF="vmailmgr-cgi.html#TOC26">6.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC27" HREF="vmailmgr-cgi.html#TOC27">6.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+The virtual user name to modify.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        destination
+<DT><STRONG>Description:</STRONG>
+<DD>
+The destination address or addresses of the alias, separated by commas.
+If an address does not contain a host name (separated from the user name
+with an <SAMP>`@'</SAMP>), it is treated as local to the virtual domain and
+must already exist.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=destination&#62;'</SAMP>
+</DL>
+
+
+
+<H3><A NAME="SEC28" HREF="vmailmgr-cgi.html#TOC28">6.2.2 Optional Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        enable
+<DT><STRONG>Description:</STRONG>
+<DD>
+Set this field to <SAMP>`0'</SAMP> to cause mailbox delivery to this account to
+be disabled after changing the alias.
+Set it to any number except <SAMP>`0'</SAMP> to cause mailbox delivery to be
+enabled before changing the alias.
+If it is not set, the mailbox is neither enabled nor disabled.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;select name=enable&#62;
+&#60;option value=0&#62;Disable
+&#60;option value=1&#62;Enable
+&#60;/select&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC29" HREF="vmailmgr-cgi.html#TOC29">7. vdeluser</A></H1>
+
+
+
+<H2><A NAME="SEC30" HREF="vmailmgr-cgi.html#TOC30">7.1 Overview</A></H2>
+
+<P>
+This CGI program deletes a user from a virtual domain.
+
+
+
+
+<H2><A NAME="SEC31" HREF="vmailmgr-cgi.html#TOC31">7.2 Form Configuration</A></H2>
+
+
+
+<H3><A NAME="SEC32" HREF="vmailmgr-cgi.html#TOC32">7.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+The virtual user name of the user to delete.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+
+
+<H1><A NAME="SEC33" HREF="vmailmgr-cgi.html#TOC33">8. vpasswd</A></H1>
+
+
+
+<H2><A NAME="SEC34" HREF="vmailmgr-cgi.html#TOC34">8.1 Overview</A></H2>
+
+<P>
+This CGI program can be used to change the password of a user either by
+the user themself or by the domain administrator.
+
+
+
+
+<H2><A NAME="SEC35" HREF="vmailmgr-cgi.html#TOC35">8.2 Form Configuration</A></H2>
+
+<P>
+The password field used by this CGI may match either the password of the
+virtual domain administrator or that of the user being modified.
+
+
+
+
+<H3><A NAME="SEC36" HREF="vmailmgr-cgi.html#TOC36">8.2.1 Required Form Fields</A></H3>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        username
+<DT><STRONG>Description:</STRONG>
+<DD>
+This field specifies the name of the user that is to be modified.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=text name=username&#62;'</SAMP>
+</DL>
+
+<DL COMPACT>
+
+<DT><STRONG>Field:</STRONG>
+<DD>
+        newpass1, newpass2
+<DT><STRONG>Description:</STRONG>
+<DD>
+These two fields specify the new password of the user.
+They must match for the password to be changed.
+The password may contain any combination of
+letters, digits, or punctuation symbols.
+<DT><STRONG>Syntax:</STRONG>
+<DD>
+<SAMP>`&#60;input type=password name=newpass1&#62; &#60;input type=password name=newpass2&#62;'</SAMP>
+</DL>
+
+<P><HR><P>
+This document was generated on 5 July 2000 using
+<A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
+</BODY>
+</HTML>

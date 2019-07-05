@@ -1,0 +1,432 @@
+# Makefile.in generated automatically by automake 1.4a from Makefile.am
+
+# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# This Makefile.in is free software; the Free Software Foundation
+# gives unlimited permission to copy and/or distribute it,
+# with or without modifications, as long as this notice is preserved.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY, to the extent permitted by law; without
+# even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+
+SHELL = @SHELL@
+
+srcdir = @srcdir@
+top_srcdir = @top_srcdir@
+VPATH = @srcdir@
+prefix = @prefix@
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+sbindir = @sbindir@
+libexecdir = @libexecdir@
+datadir = @datadir@
+sysconfdir = @sysconfdir@
+sharedstatedir = @sharedstatedir@
+localstatedir = @localstatedir@
+libdir = @libdir@
+infodir = @infodir@
+mandir = @mandir@
+includedir = @includedir@
+oldincludedir = /usr/include
+
+DESTDIR =
+
+pkgdatadir = $(datadir)/@PACKAGE@
+pkglibdir = $(libdir)/@PACKAGE@
+pkgincludedir = $(includedir)/@PACKAGE@
+
+top_builddir = ../..
+
+ACLOCAL = @ACLOCAL@
+AUTOCONF = @AUTOCONF@
+AUTOMAKE = @AUTOMAKE@
+AUTOHEADER = @AUTOHEADER@
+
+INSTALL = @INSTALL@
+INSTALL_PROGRAM = @INSTALL_PROGRAM@
+INSTALL_DATA = @INSTALL_DATA@
+INSTALL_SCRIPT = @INSTALL_SCRIPT@
+INSTALL_STRIP_FLAG =
+transform = @program_transform_name@
+
+NORMAL_INSTALL = :
+PRE_INSTALL = :
+POST_INSTALL = :
+NORMAL_UNINSTALL = :
+PRE_UNINSTALL = :
+POST_UNINSTALL = :
+CC = @CC@
+CXX = @CXX@
+HTML2TXT = @HTML2TXT@
+LN = @LN@
+LYNX = @LYNX@
+MAKEINFO = @MAKEINFO@
+MKDIR = @MKDIR@
+PACKAGE = @PACKAGE@
+PYTHON = @PYTHON@
+RANLIB = @RANLIB@
+RM = @RM@
+STRIP = @STRIP@
+VERSION = @VERSION@
+W3M = @W3M@
+cgidir = @cgidir@
+phpdir = @phpdir@
+pythonlibdir = @pythonlibdir@
+
+noinst_LIBRARIES = libconfig.a
+bin_PROGRAMS = showvconfig
+EXTRA_DIST = configrc.in build-config.sh 	configrc.h.in Makefile.am.in configvar.in showvconfig.cc.in
+
+
+INCLUDES = -I..
+
+libconfig_a_SOURCES =  	_autoresponse_dir.cc 	_autoresponse_file.cc 	_bulletin_dir.cc 	_default_expiry.cc 	_default_maildir.cc 	_default_msgcount.cc 	_default_msgsize.cc 	_default_hardquota.cc 	_default_softquota.cc 	_default_username.cc 	_error_maildir.cc 	_global_bulletin_dir.cc 	_maildir_arg_str.cc 	_password_file.cc 	_postmaster_aliases.cc 	_postmaster_email.cc 	_qmail_root.cc 	_separators.cc 	_socket_file.cc 	_user_dir.cc 	_user_dir_bits.cc 	_user_dir_slices.cc 	configio.h config_read.cc 	configrc.h configrc.cc 	read_dir.cc read_list.cc read_str.cc read_uns.cc
+
+
+showvconfig_SOURCES = showvconfig.cc
+showvconfig_LDADD = libconfig.a ../fdbuf/libfdbuf.a ../misc/libmisc.a 	../mystring/libmystring.a ../vdomain/libvdomain.a 	../vpwtable/libvpwtable.a
+
+mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
+CONFIG_HEADER = ../../config.h
+CONFIG_CLEAN_FILES = 
+LIBRARIES =  $(noinst_LIBRARIES)
+
+
+DEFS = @DEFS@ -I. -I$(srcdir) -I../..
+CPPFLAGS = @CPPFLAGS@
+LDFLAGS = @LDFLAGS@
+LIBS = @LIBS@
+libconfig_a_LIBADD = 
+libconfig_a_OBJECTS =  _autoresponse_dir.o _autoresponse_file.o \
+_bulletin_dir.o _default_expiry.o _default_maildir.o \
+_default_msgcount.o _default_msgsize.o _default_hardquota.o \
+_default_softquota.o _default_username.o _error_maildir.o \
+_global_bulletin_dir.o _maildir_arg_str.o _password_file.o \
+_postmaster_aliases.o _postmaster_email.o _qmail_root.o _separators.o \
+_socket_file.o _user_dir.o _user_dir_bits.o _user_dir_slices.o \
+config_read.o configrc.o read_dir.o read_list.o read_str.o read_uns.o
+AR = ar
+PROGRAMS =  $(bin_PROGRAMS)
+
+showvconfig_OBJECTS =  showvconfig.o
+showvconfig_DEPENDENCIES =  libconfig.a ../fdbuf/libfdbuf.a \
+../misc/libmisc.a ../mystring/libmystring.a ../vdomain/libvdomain.a \
+../vpwtable/libvpwtable.a
+showvconfig_LDFLAGS = 
+CXXFLAGS = @CXXFLAGS@
+CXXCOMPILE = $(CXX) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
+CXXLD = $(CXX)
+CXXLINK = $(CXXLD) $(AM_CXXFLAGS) $(CXXFLAGS) $(LDFLAGS) -o $@
+CFLAGS = @CFLAGS@
+COMPILE = $(CC) $(DEFS) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
+CCLD = $(CC)
+LINK = $(CCLD) $(AM_CFLAGS) $(CFLAGS) $(LDFLAGS) -o $@
+DIST_COMMON =  Makefile.am Makefile.in
+
+
+DISTFILES = $(DIST_COMMON) $(SOURCES) $(HEADERS) $(TEXINFOS) $(EXTRA_DIST)
+
+TAR = gtar
+GZIP_ENV = --best
+SOURCES = $(libconfig_a_SOURCES) $(showvconfig_SOURCES)
+OBJECTS = $(libconfig_a_OBJECTS) $(showvconfig_OBJECTS)
+
+all: all-redirect
+.SUFFIXES:
+.SUFFIXES: .S .c .cc .o .s
+$(srcdir)/Makefile.in: Makefile.am $(top_srcdir)/configure.in $(ACLOCAL_M4) 
+	cd $(top_srcdir) && $(AUTOMAKE) --gnu --include-deps lib/config/Makefile
+
+Makefile: $(srcdir)/Makefile.in  $(top_builddir)/config.status
+	cd $(top_builddir) \
+	  && CONFIG_FILES=$(subdir)/$@ CONFIG_HEADERS= $(SHELL) ./config.status
+
+
+mostlyclean-noinstLIBRARIES:
+
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+
+distclean-noinstLIBRARIES:
+
+maintainer-clean-noinstLIBRARIES:
+
+.c.o:
+	$(COMPILE) -c $<
+
+.s.o:
+	$(COMPILE) -c $<
+
+.S.o:
+	$(COMPILE) -c $<
+
+mostlyclean-compile:
+	-rm -f *.o core *.core
+
+clean-compile:
+
+distclean-compile:
+	-rm -f *.tab.c
+
+maintainer-clean-compile:
+
+libconfig.a: $(libconfig_a_OBJECTS) $(libconfig_a_DEPENDENCIES)
+	-rm -f libconfig.a
+	$(AR) cru libconfig.a $(libconfig_a_OBJECTS) $(libconfig_a_LIBADD)
+	$(RANLIB) libconfig.a
+
+mostlyclean-binPROGRAMS:
+
+clean-binPROGRAMS:
+	-test -z "$(bin_PROGRAMS)" || rm -f $(bin_PROGRAMS)
+
+distclean-binPROGRAMS:
+
+maintainer-clean-binPROGRAMS:
+
+install-binPROGRAMS: $(bin_PROGRAMS)
+	@$(NORMAL_INSTALL)
+	$(mkinstalldirs) $(DESTDIR)$(bindir)
+	@list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  if test -f $$p; then \
+	    echo "  $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`"; \
+	     $(INSTALL_PROGRAM) $(INSTALL_STRIP_FLAG) $$p $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	  else :; fi; \
+	done
+
+uninstall-binPROGRAMS:
+	@$(NORMAL_UNINSTALL)
+	list='$(bin_PROGRAMS)'; for p in $$list; do \
+	  rm -f $(DESTDIR)$(bindir)/`echo $$p|sed 's/$(EXEEXT)$$//'|sed '$(transform)'|sed 's/$$/$(EXEEXT)/'`; \
+	done
+
+showvconfig: $(showvconfig_OBJECTS) $(showvconfig_DEPENDENCIES)
+	@rm -f showvconfig
+	$(CXXLINK) $(showvconfig_LDFLAGS) $(showvconfig_OBJECTS) $(showvconfig_LDADD) $(LIBS)
+.cc.o:
+	$(CXXCOMPILE) -c $<
+
+tags: TAGS
+
+ID: $(HEADERS) $(SOURCES) $(LISP)
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	here=`pwd` && cd $(srcdir) \
+	  && mkid -f$$here/ID $$unique $(LISP)
+
+TAGS:  $(HEADERS) $(SOURCES)  $(TAGS_DEPENDENCIES) $(LISP)
+	tags=; \
+	here=`pwd`; \
+	list='$(SOURCES) $(HEADERS)'; \
+	unique=`for i in $$list; do echo $$i; done | \
+	  awk '    { files[$$0] = 1; } \
+	       END { for (i in files) print i; }'`; \
+	test -z "$(ETAGS_ARGS)$$unique$(LISP)$$tags" \
+	  || (cd $(srcdir) && etags $(ETAGS_ARGS) $$tags  $$unique $(LISP) -o $$here/TAGS)
+
+mostlyclean-tags:
+
+clean-tags:
+
+distclean-tags:
+	-rm -f TAGS ID
+
+maintainer-clean-tags:
+
+distdir = $(top_builddir)/$(PACKAGE)-$(VERSION)/$(subdir)
+
+subdir = lib/config
+
+distdir: $(DISTFILES)
+	@for file in $(DISTFILES); do \
+	  d=$(srcdir); \
+	  if test -d $$d/$$file; then \
+	    cp -pr $$d/$$file $(distdir)/$$file; \
+	  else \
+	    test -f $(distdir)/$$file \
+	    || ln $$d/$$file $(distdir)/$$file 2> /dev/null \
+	    || cp -p $$d/$$file $(distdir)/$$file || :; \
+	  fi; \
+	done
+_autoresponse_dir.o: _autoresponse_dir.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_autoresponse_file.o: _autoresponse_file.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_bulletin_dir.o: _bulletin_dir.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_default_expiry.o: _default_expiry.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_default_hardquota.o: _default_hardquota.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_default_maildir.o: _default_maildir.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_default_msgcount.o: _default_msgcount.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_default_msgsize.o: _default_msgsize.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_default_softquota.o: _default_softquota.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_default_username.o: _default_username.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_error_maildir.o: _error_maildir.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_global_bulletin_dir.o: _global_bulletin_dir.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_maildir_arg_str.o: _maildir_arg_str.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_max_fork.o: _max_fork.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_password_file.o: _password_file.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_postmaster_aliases.o: _postmaster_aliases.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_postmaster_email.o: _postmaster_email.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+_qmail_root.o: _qmail_root.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_separators.o: _separators.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_socket_file.o: _socket_file.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_user_dir.o: _user_dir.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_user_dir_bits.o: _user_dir_bits.cc configio.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../config/configrc.h ../misc/strlist.h
+_user_dir_slices.o: _user_dir_slices.cc configio.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h
+config_read.o: config_read.cc ../../config.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../fdbuf/fdbuf.h ../fdbuf/fdibuf.h ../fdbuf/fdobuf.h configio.h \
+	../config/configrc.h ../misc/strlist.h
+configrc.o: configrc.cc ../../config.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../fdbuf/fdbuf.h ../fdbuf/fdibuf.h ../fdbuf/fdobuf.h configrc.h \
+	../misc/strlist.h
+read_dir.o: read_dir.cc ../../config.h configrc.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../misc/strlist.h configio.h ../config/configrc.h
+read_list.o: read_list.cc ../../config.h configrc.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../misc/strlist.h
+read_str.o: read_str.cc ../../config.h configrc.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../misc/strlist.h configio.h ../config/configrc.h
+read_uns.o: read_uns.cc ../../config.h configrc.h ../mystring/mystring.h \
+	../mystring/rep.h ../mystring/iter.h ../mystring/join.h \
+	../misc/strlist.h configio.h ../config/configrc.h \
+	../misc/strtou.h
+showvconfig.o: showvconfig.cc ../../config.h ../misc/pwentry.h \
+	../mystring/mystring.h ../mystring/rep.h ../mystring/iter.h \
+	../mystring/join.h ../config/configrc.h ../misc/strlist.h \
+	../vdomain/vdomain.h ../vpwtable/vpwtable.h \
+	../vpwentry/vpwentry.h ../cdb++/cdb++.h ../cdb++/datum.h \
+	../fdbuf/fdbuf.h ../fdbuf/fdibuf.h ../fdbuf/fdobuf.h \
+	../misc/response.h configrc.h
+
+info-am:
+info: info-am
+dvi-am:
+dvi: dvi-am
+check-am: all-am
+check: check-am
+installcheck-am:
+installcheck: installcheck-am
+install-exec-am: install-binPROGRAMS
+install-exec: install-exec-am
+
+install-data-am:
+install-data: install-data-am
+
+install-am: all-am
+	@$(MAKE) $(AM_MAKEFLAGS) install-exec-am install-data-am
+install: install-am
+uninstall-am: uninstall-binPROGRAMS
+uninstall: uninstall-am
+all-am: Makefile $(LIBRARIES) $(PROGRAMS)
+all-redirect: all-am
+install-strip:
+	$(MAKE) $(AM_MAKEFLAGS) INSTALL_STRIP_FLAG=-s install
+installdirs:
+	$(mkinstalldirs)  $(DESTDIR)$(bindir)
+
+
+mostlyclean-generic:
+
+clean-generic:
+
+distclean-generic:
+	-rm -f Makefile $(CONFIG_CLEAN_FILES)
+	-rm -f config.cache config.log stamp-h stamp-h[0-9]*
+
+maintainer-clean-generic:
+mostlyclean-am:  mostlyclean-noinstLIBRARIES mostlyclean-compile \
+		mostlyclean-binPROGRAMS mostlyclean-tags \
+		mostlyclean-generic
+
+mostlyclean: mostlyclean-am
+
+clean-am:  clean-noinstLIBRARIES clean-compile clean-binPROGRAMS \
+		clean-tags clean-generic mostlyclean-am
+
+clean: clean-am
+
+distclean-am:  distclean-noinstLIBRARIES distclean-compile \
+		distclean-binPROGRAMS distclean-tags distclean-generic \
+		clean-am
+
+distclean: distclean-am
+
+maintainer-clean-am:  maintainer-clean-noinstLIBRARIES \
+		maintainer-clean-compile maintainer-clean-binPROGRAMS \
+		maintainer-clean-tags maintainer-clean-generic \
+		distclean-am
+	@echo "This command is intended for maintainers to use;"
+	@echo "it deletes files that may require special tools to rebuild."
+
+maintainer-clean: maintainer-clean-am
+
+.PHONY: mostlyclean-noinstLIBRARIES distclean-noinstLIBRARIES \
+clean-noinstLIBRARIES maintainer-clean-noinstLIBRARIES \
+mostlyclean-compile distclean-compile clean-compile \
+maintainer-clean-compile mostlyclean-binPROGRAMS distclean-binPROGRAMS \
+clean-binPROGRAMS maintainer-clean-binPROGRAMS uninstall-binPROGRAMS \
+install-binPROGRAMS tags mostlyclean-tags distclean-tags clean-tags \
+maintainer-clean-tags distdir info-am info dvi-am dvi check check-am \
+installcheck-am installcheck install-exec-am install-exec \
+install-data-am install-data install-am install uninstall-am uninstall \
+all-redirect all-am all installdirs mostlyclean-generic \
+distclean-generic clean-generic maintainer-clean-generic clean \
+mostlyclean distclean maintainer-clean
+
+
+# Tell versions [3.59,3.63) of GNU make to not export all variables.
+# Otherwise a system limit (for SysV at least) may be exceeded.
+.NOEXPORT:

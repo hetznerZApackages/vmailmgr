@@ -1,0 +1,80 @@
+<HTML>
+<HEAD>
+<TITLE>vpasswd - change a virtual user's password</TITLE>
+<LINK REV="made" HREF="mailto:root@porky.devel.redhat.com">
+</HEAD>
+
+<BODY>
+
+<!-- INDEX BEGIN -->
+<!--
+
+<UL>
+
+	<LI><A HREF="#NAME">NAME</A>
+	<LI><A HREF="#SYNOPSIS">SYNOPSIS</A>
+	<LI><A HREF="#DESCRIPTION">DESCRIPTION</A>
+	<LI><A HREF="#RETURN_VALUE">RETURN VALUE</A>
+	<LI><A HREF="#SEE_ALSO">SEE ALSO</A>
+	<LI><A HREF="#NOTES">NOTES</A>
+	<LI><A HREF="#AUTHOR">AUTHOR</A>
+</UL>
+-->
+<!-- INDEX END -->
+
+<P>
+<H1><A NAME="NAME">NAME</A></H1>
+<P>
+vpasswd - change a virtual user's password
+
+<P>
+<HR>
+<H1><A NAME="SYNOPSIS">SYNOPSIS</A></H1>
+<P>
+<STRONG>vpasswd</STRONG>  <STRONG>username</STRONG>
+
+
+
+<P>
+<HR>
+<H1><A NAME="DESCRIPTION">DESCRIPTION</A></H1>
+<P>
+This program is used to change a user's password within a virtual domain.
+
+<P>
+It will read a password using the same method as vadduser
+(@pxref{vadduser}) and then re-write the local password file using the new
+password.
+
+<P>
+<HR>
+<H1><A NAME="RETURN_VALUE">RETURN VALUE</A></H1>
+<P>
+0 if the password was changed successfully, nonzero otherwise.
+
+<P>
+<HR>
+<H1><A NAME="SEE_ALSO">SEE ALSO</A></H1>
+<P>
+<CODE>checkvpw(1)</CODE>
+
+<P>
+<HR>
+<H1><A NAME="NOTES">NOTES</A></H1>
+<P>
+You must have either created the users subdirectory by hand or run the
+<EM>vsetup</EM> program before using this program.
+
+<P>
+This program expects the environment variable <CODE>HOME</CODE> to be set, and executes a change directory to the contents of it before
+starting. It is also required that you change user to the domain owner
+before using these utilities.
+
+<P>
+<HR>
+<H1><A NAME="AUTHOR">AUTHOR</A></H1>
+<P>
+Bruce Guenter &lt;<EM>bruceg@em.ca</EM>&gt;.
+</BODY>
+
+</HTML>

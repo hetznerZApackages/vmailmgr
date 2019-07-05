@@ -1,0 +1,291 @@
+.rn '' }`
+''' $RCSfile$$Revision$$Date$
+'''
+''' $Log$
+'''
+.de Sh
+.br
+.if t .Sp
+.ne 5
+.PP
+\fB\\$1\fR
+.PP
+..
+.de Sp
+.if t .sp .5v
+.if n .sp
+..
+.de Ip
+.br
+.ie \\n(.$>=3 .ne \\$3
+.el .ne 3
+.IP "\\$1" \\$2
+..
+.de Vb
+.ft CW
+.nf
+.ne \\$1
+..
+.de Ve
+.ft R
+
+.fi
+..
+'''
+'''
+'''     Set up \*(-- to give an unbreakable dash;
+'''     string Tr holds user defined translation string.
+'''     Bell System Logo is used as a dummy character.
+'''
+.tr \(*W-|\(bv\*(Tr
+.ie n \{\
+.ds -- \(*W-
+.ds PI pi
+.if (\n(.H=4u)&(1m=24u) .ds -- \(*W\h'-12u'\(*W\h'-12u'-\" diablo 10 pitch
+.if (\n(.H=4u)&(1m=20u) .ds -- \(*W\h'-12u'\(*W\h'-8u'-\" diablo 12 pitch
+.ds L" ""
+.ds R" ""
+'''   \*(M", \*(S", \*(N" and \*(T" are the equivalent of
+'''   \*(L" and \*(R", except that they are used on ".xx" lines,
+'''   such as .IP and .SH, which do another additional levels of
+'''   double-quote interpretation
+.ds M" """
+.ds S" """
+.ds N" """""
+.ds T" """""
+.ds L' '
+.ds R' '
+.ds M' '
+.ds S' '
+.ds N' '
+.ds T' '
+'br\}
+.el\{\
+.ds -- \(em\|
+.tr \*(Tr
+.ds L" ``
+.ds R" ''
+.ds M" ``
+.ds S" ''
+.ds N" ``
+.ds T" ''
+.ds L' `
+.ds R' '
+.ds M' `
+.ds S' '
+.ds N' `
+.ds T' '
+.ds PI \(*p
+'br\}
+.\"	If the F register is turned on, we'll generate
+.\"	index entries out stderr for the following things:
+.\"		TH	Title 
+.\"		SH	Header
+.\"		Sh	Subsection 
+.\"		Ip	Item
+.\"		X<>	Xref  (embedded
+.\"	Of course, you have to process the output yourself
+.\"	in some meaninful fashion.
+.if \nF \{
+.de IX
+.tm Index:\\$1\t\\n%\t"\\$2"
+..
+.nr % 0
+.rr F
+.\}
+.TH CHECKVPW 1 "vmailmgr 0.96.8" "1/Apr/2000" "VMailMgr Tools Documentation"
+.UC
+.if n .hy 0
+.if n .na
+.ds C+ C\v'-.1v'\h'-1p'\s-2+\h'-1p'+\s0\v'.1v'\h'-1p'
+.de CQ          \" put $1 in typewriter font
+.ft CW
+'if n "\c
+'if t \\&\\$1\c
+'if n \\&\\$1\c
+'if n \&"
+\\&\\$2 \\$3 \\$4 \\$5 \\$6 \\$7
+'.ft R
+..
+.\" @(#)ms.acc 1.5 88/02/08 SMI; from UCB 4.2
+.	\" AM - accent mark definitions
+.bd B 3
+.	\" fudge factors for nroff and troff
+.if n \{\
+.	ds #H 0
+.	ds #V .8m
+.	ds #F .3m
+.	ds #[ \f1
+.	ds #] \fP
+.\}
+.if t \{\
+.	ds #H ((1u-(\\\\n(.fu%2u))*.13m)
+.	ds #V .6m
+.	ds #F 0
+.	ds #[ \&
+.	ds #] \&
+.\}
+.	\" simple accents for nroff and troff
+.if n \{\
+.	ds ' \&
+.	ds ` \&
+.	ds ^ \&
+.	ds , \&
+.	ds ~ ~
+.	ds ? ?
+.	ds ! !
+.	ds /
+.	ds q
+.\}
+.if t \{\
+.	ds ' \\k:\h'-(\\n(.wu*8/10-\*(#H)'\'\h"|\\n:u"
+.	ds ` \\k:\h'-(\\n(.wu*8/10-\*(#H)'\`\h'|\\n:u'
+.	ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'^\h'|\\n:u'
+.	ds , \\k:\h'-(\\n(.wu*8/10)',\h'|\\n:u'
+.	ds ~ \\k:\h'-(\\n(.wu-\*(#H-.1m)'~\h'|\\n:u'
+.	ds ? \s-2c\h'-\w'c'u*7/10'\u\h'\*(#H'\zi\d\s+2\h'\w'c'u*8/10'
+.	ds ! \s-2\(or\s+2\h'-\w'\(or'u'\v'-.8m'.\v'.8m'
+.	ds / \\k:\h'-(\\n(.wu*8/10-\*(#H)'\z\(sl\h'|\\n:u'
+.	ds q o\h'-\w'o'u*8/10'\s-4\v'.4m'\z\(*i\v'-.4m'\s+4\h'\w'o'u*8/10'
+.\}
+.	\" troff and (daisy-wheel) nroff accents
+.ds : \\k:\h'-(\\n(.wu*8/10-\*(#H+.1m+\*(#F)'\v'-\*(#V'\z.\h'.2m+\*(#F'.\h'|\\n:u'\v'\*(#V'
+.ds 8 \h'\*(#H'\(*b\h'-\*(#H'
+.ds v \\k:\h'-(\\n(.wu*9/10-\*(#H)'\v'-\*(#V'\*(#[\s-4v\s0\v'\*(#V'\h'|\\n:u'\*(#]
+.ds _ \\k:\h'-(\\n(.wu*9/10-\*(#H+(\*(#F*2/3))'\v'-.4m'\z\(hy\v'.4m'\h'|\\n:u'
+.ds . \\k:\h'-(\\n(.wu*8/10)'\v'\*(#V*4/10'\z.\v'-\*(#V*4/10'\h'|\\n:u'
+.ds 3 \*(#[\v'.2m'\s-2\&3\s0\v'-.2m'\*(#]
+.ds o \\k:\h'-(\\n(.wu+\w'\(de'u-\*(#H)/2u'\v'-.3n'\*(#[\z\(de\v'.3n'\h'|\\n:u'\*(#]
+.ds d- \h'\*(#H'\(pd\h'-\w'~'u'\v'-.25m'\f2\(hy\fP\v'.25m'\h'-\*(#H'
+.ds D- D\\k:\h'-\w'D'u'\v'-.11m'\z\(hy\v'.11m'\h'|\\n:u'
+.ds th \*(#[\v'.3m'\s+1I\s-1\v'-.3m'\h'-(\w'I'u*2/3)'\s-1o\s+1\*(#]
+.ds Th \*(#[\s+2I\s-2\h'-\w'I'u*3/5'\v'-.3m'o\v'.3m'\*(#]
+.ds ae a\h'-(\w'a'u*4/10)'e
+.ds Ae A\h'-(\w'A'u*4/10)'E
+.ds oe o\h'-(\w'o'u*4/10)'e
+.ds Oe O\h'-(\w'O'u*4/10)'E
+.	\" corrections for vroff
+.if v .ds ~ \\k:\h'-(\\n(.wu*9/10-\*(#H)'\s-2\u~\d\s+2\h'|\\n:u'
+.if v .ds ^ \\k:\h'-(\\n(.wu*10/11-\*(#H)'\v'-.4m'^\v'.4m'\h'|\\n:u'
+.	\" for low resolution devices (crt and lpr)
+.if \n(.H>23 .if \n(.V>19 \
+\{\
+.	ds : e
+.	ds 8 ss
+.	ds v \h'-1'\o'\(aa\(ga'
+.	ds _ \h'-1'^
+.	ds . \h'-1'.
+.	ds 3 3
+.	ds o a
+.	ds d- d\h'-1'\(ga
+.	ds D- D\h'-1'\(hy
+.	ds th \o'bp'
+.	ds Th \o'LP'
+.	ds ae ae
+.	ds Ae AE
+.	ds oe oe
+.	ds Oe OE
+.\}
+.rm #[ #] #H #V #F C
+.SH "NAME"
+checkvpw \- check passwords for virtual and non-virtual users
+.SH "SYNOPSIS"
+\fBcheckvpw\fR \fBsubprogram\fR [\fBarguments...\fR]
+.SH "DESCRIPTION"
+This program is a drop-in replacement for the standard checkpassword,
+written by D. J. Bernstein (djb@pobox.com).
+In the absence of virtual hosting (determined by the use of
+\fI/var/qmail/control/virtualdomainss\fR and IP aliases),
+it behaves identically to checkpassword.
+When virtual hosting is used, it permits logins from a unique set of
+users for each of the aliases.
+.PP
+\fIcheckvpw\fR must be run from either the \fItcp-env\fR program
+(part of the \fIqmail\fR
+package) or from a suitable substitute, such as \fItcpserver\fR
+(part of the \fIucspi-tcp\fR package).
+These packages are used to determine to
+which address a remote host is connecting.
+\fIcheckvpw\fR must also be passed the checkpassword-compatible
+authentication data on file descriptor three.
+This can be accomplished by running it from a tool such as
+\fIqmail-popup\fR.
+.PP
+\fIcheckvpw\fR accepts a command line in the following format:
+.PP
+.Vb 1
+\&        checkvpw [subprogram] [arguments...]
+.Ve
+If the authentication information is valid, the subprogram is run,
+otherwise \fIcheckvpw\fR returns an error to the program that invokes it.
+.PP
+If the user name contains the character \f(CW@\fR, the host name
+reported by \fItcp-env\fR is replaced by the string following the
+\f(CW@\fR, and the user name is replaced by the string preceding the
+\f(CW@\fR.
+If the local host name reported by \fItcp-env\fR matches one of those
+in \fI/var/qmail/control/virtualdomains\fR, \fIcheckvpw\fR prepends the
+\fIprepend\fR string associated with the host name to the given user
+name.
+Wildcards in \fIvirtualdomains\fR are permitted and are handled in the
+same way \fIqmail\fR handles them (see the \fIqmail-send\fR manpage).
+For example, if the line \f(CW.bar.com:bar\fR appears in the virtual hosts
+file, it matches \f(CWone.two.bar.com\fR but not \f(CWbar.com\fR.
+.PP
+If the user name resulting from the above step appears in the system
+password file (typically \fI/etc/passwd\fR), the user is treated as a
+local user and authenticated with the information from that file.
+If this authentication succeeds, the mail directory is set to the
+subdirectory named on the command line.
+If the user name does not appear in the system password file and is of
+the form \f(CWname-ext\fR where \f(CWname\fR does appear in the password
+file, the user is treated as a \*(L"virtual\*(R" user and authenticated with the
+information from a file named \fIpasswd\fR in the user's home directory.
+If this authentication succeeds, the mail directory is set to the
+subdirectory \fIusers/ext/\fR in the user's home directory, where
+\f(CWext\fR is from the above step.
+.PP
+\fIcheckvpw\fR also does some rewriting on the arguments of the
+subprogram.
+Any argument matching the string \*(L"\f(CWmaildir\fR\*(R" (ignoring case) is
+replaced with the full path of the mail directory, as determined by the
+steps above.
+.PP
+This program may be invoked in combination with \fIqmail-popup\fR and
+\fIqmail-pop3d\fR from inetd by placing the following line in the
+\fI/etc/inetd.conf\fR configuration file (all one line):
+.PP
+.Vb 1
+\&        pop-3 stream tcp nowait root /var/qmail/bin/tcp-env tcp-env -R /var/qmail/bin/qmail-popup <hostname> /usr/bin/checkvpw /var/qmail/bin/qmail-pop3d Maildir/
+.Ve
+.SH "RETURN VALUE"
+0 if the user is successfully authenticated, nonzero if any error
+occurred.  Exit code 1 indicates that a bad password was given, 2
+indicates that the program was used incorrectly, and 111 indicates
+a temporary failure.
+.SH "ENVIRONMENT"
+\fIcheckvpw\fR requires that \f(CWTCPLOCALHOST\fR be set to the host name of
+the local address of the connection.
+.SH "SEE ALSO"
+\fIvdeliver\fR\|(1)
+.SH "AUTHOR"
+Bruce Guenter <\fIbruceg@em.ca\fR>.
+
+.rn }` ''
+.IX Title "CHECKVPW 1"
+.IX Name "checkvpw - check passwords for virtual and non-virtual users"
+
+.IX Header "NAME"
+
+.IX Header "SYNOPSIS"
+
+.IX Header "DESCRIPTION"
+
+.IX Header "RETURN VALUE"
+
+.IX Header "ENVIRONMENT"
+
+.IX Header "SEE ALSO"
+
+.IX Header "AUTHOR"
+
