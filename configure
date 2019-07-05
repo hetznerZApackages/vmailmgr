@@ -870,7 +870,7 @@ fi
  esac
 else
   cat >> confdefs.h <<\EOF
-#define VPWTABLE_CDB 1
+define VPWTABLE_CDB 1
 EOF
 
 	
