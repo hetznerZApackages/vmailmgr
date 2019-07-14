@@ -1,3 +1,10 @@
+vmailmgr (1:0.97.1+deb9hetz1~exp7) stretch-hetz-experimental; urgency=low
+
+  * Stop trying to configure and build on Stretch - just install Jessie
+    binaries
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 14 Jul 2019 08:18:15 +0200
+
 vmailmgr (1:0.97.1+deb9hetz1~exp6) stretch-hetz-experimental; urgency=low
 
   * Install other binaries in the correct path
