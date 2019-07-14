@@ -10,3 +10,5 @@ override_dh_auto_install:
 	dh_install cgi-bin/* usr/lib/cgi-bin/
 	dh_install inc/* usr/www/httpd/php/
 
+# Commands not to run:
+override_dh_installinfo:
