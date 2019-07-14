@@ -6,5 +6,15 @@ export LINUX_CFLAGS='-DLINUX  -D_XOPEN_SOURCE -D_BSD_SOURCE'
 %:
 	dh $@ --with quilt
 
+override_dh_install:
+	# Add here commands to install the package into debian/vmailmgr.
+	$(MAKE) DESTDIR=$(CURDIR)/debian/vmailmgr install
+	install $(CURDIR)/commands/vmakegrpmail $(CURDIR)/debian/vmailmgr/usr/bin/
+	for command in vadduser vdeluser vpasswd; do \
+		mv $(CURDIR)/debian/vmailmgr/usr/bin/$${command} $(CURDIR)/debian/vmailmgr/usr/bin/$${command}-real; \
+		install $(CURDIR)/commands/$${command}-wrapper $(CURDIR)/debian/vmailmgr/usr/bin/$${command}; \
+	done
+
+
 # Commands not to run:
 override_dh_installinfo:

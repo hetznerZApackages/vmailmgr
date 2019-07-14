@@ -1,3 +1,9 @@
+vmailmgr (1:0.97.1+deb9hetz1~exp6) stretch-hetz-experimental; urgency=low
+
+  * Install other binaries in the correct path
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Sun, 14 Jul 2019 07:06:36 +0200
+
 vmailmgr (1:0.97.1+deb9hetz1~exp5) stretch-hetz-experimental; urgency=low
 
   * Tweaking debian/rules to get compilation to work
