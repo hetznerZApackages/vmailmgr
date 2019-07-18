@@ -1,3 +1,9 @@
+vmailmgr (1:0.97.1+deb9hetz3) stretch-hetz; urgency=low
+
+  * Released 1:0.97.1+deb9hetz3~exp1 as 1:0.97.1+deb9hetz3
+
+ -- Geoff Robertson <gr@hetzner.co.za>  Thu, 18 Jul 2019 14:39:56 +0200
+
 vmailmgr (1:0.97.1+deb9hetz3~exp1) stretch-hetz-experimental; urgency=low
 
   * Build with the correct COW
