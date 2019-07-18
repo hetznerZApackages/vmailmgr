@@ -1,3 +1,9 @@
+vmailmgr (1:0.97.1+deb9hetz1) stretch-hetz; urgency=low
+
+  * Released 1:0.97.1+deb9hetz1~exp7 as 1:0.97.1+deb9hetz1
+
+ -- Walter Kleynscheldt <walter.kleynscheldt@hetzner.co.za>  Thu, 18 Jul 2019 11:34:50 +0200
+
 vmailmgr (1:0.97.1+deb9hetz1~exp7) stretch-hetz-experimental; urgency=low
 
   * Stop trying to configure and build on Stretch - just install Jessie
