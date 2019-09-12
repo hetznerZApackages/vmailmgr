@@ -1,8 +1,14 @@
+vmailmgr (1:0.96.9-1+hetz3~exp1) jessie-hetz-experimental; urgency=low
+
+  * Remove vmakegrpmail from patches
+
+ -- Willem Basson <willem.basson@hetzner.co.za>  Thu, 12 Sep 2019 15:44:21 +0200
+
 vmailmgr (1:0.96.9-1+hetz2) jessie-hetz; urgency=low
 
   * Released 1:0.96.9-1+hetz2~exp3 as 1:0.96.9-1+hetz2
 
- -- Willem Basson <willem.basson@hetzner.co.za>  Fri, 06 Jul 2018 09:43:29 +0200
+ -- Willem Basson <willem.basson@hetzner.co.za>  Thu, 12 Sep 2019 15:44:21 +0200
 
 vmailmgr (1:0.96.9-1+hetz2~exp3) jessie-hetz-experimental; urgency=low
 

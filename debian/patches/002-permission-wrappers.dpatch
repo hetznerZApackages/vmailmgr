@@ -13,7 +13,6 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
 +vadduser-real $@
 +chmod 640 /usr/home/$USER/passwd.cdb
 +chmod 710 /usr/home/$USER
-+sudo vmakegrpmail $USER
 +
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vdeluser-wrapper vmailmgr/commands/vdeluser-wrapper
 --- vmailmgr~/commands/vdeluser-wrapper	1970-01-01 02:00:00.000000000 +0200
@@ -23,7 +22,6 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
 +vdeluser-real $@
 +chmod 640 /usr/home/$USER/passwd.cdb
 +chmod 710 /usr/home/$USER
-+sudo vmakegrpmail $USER
 +
 diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' '--exclude=.hg' '--exclude=_darcs' '--exclude=.bzr' vmailmgr~/commands/vmakegrpmail vmailmgr/commands/vmakegrpmail
 --- vmailmgr~/commands/vmakegrpmail	1970-01-01 02:00:00.000000000 +0200
@@ -47,5 +45,4 @@ diff -urNad '--exclude=CVS' '--exclude=.svn' '--exclude=.git' '--exclude=.arch' 
 +vpasswd-real $@
 +chmod 640 /usr/home/$USER/passwd.cdb
 +chmod 710 /usr/home/$USER
-+sudo vmakegrpmail $USER
 +
