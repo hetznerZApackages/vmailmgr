@@ -1,0 +1,17 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@
+
+override_dh_auto_install:
+	dh_install bin/* usr/bin/
+	dh_install sbin/* usr/sbin/
+	dh_install local_bin/* usr/local/bin/
+	dh_install cgi-bin/* usr/lib/cgi-bin/
+	dh_install inc/* usr/www/httpd/php/
+
+# Commands not to run:
+override_dh_installinfo:
+override_dh_installdocs:
+override_dh_usrlocal:
+override_dh_shlibdeps:

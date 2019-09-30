@@ -1,0 +1,60 @@
+Index: vmailmgr/bin/vadduser
+===================================================================
+--- vmailmgr.orig/bin/vadduser
++++ vmailmgr/bin/vadduser
+@@ -2,5 +2,3 @@
+ vadduser-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-
+Index: vmailmgr/bin/vdeluser
+===================================================================
+--- vmailmgr.orig/bin/vdeluser
++++ vmailmgr/bin/vdeluser
+@@ -2,5 +2,3 @@
+ vdeluser-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-
+Index: vmailmgr/bin/vpasswd
+===================================================================
+--- vmailmgr.orig/bin/vpasswd
++++ vmailmgr/bin/vpasswd
+@@ -2,5 +2,3 @@
+ vpasswd-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-
+Index: vmailmgr/local_bin/vadduser
+===================================================================
+--- vmailmgr.orig/local_bin/vadduser
++++ vmailmgr/local_bin/vadduser
+@@ -2,5 +2,3 @@
+ vadduser-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-
+Index: vmailmgr/local_bin/vdeluser
+===================================================================
+--- vmailmgr.orig/local_bin/vdeluser
++++ vmailmgr/local_bin/vdeluser
+@@ -2,5 +2,3 @@
+ vdeluser-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-
+Index: vmailmgr/local_bin/vpasswd
+===================================================================
+--- vmailmgr.orig/local_bin/vpasswd
++++ vmailmgr/local_bin/vpasswd
+@@ -2,5 +2,3 @@
+ vpasswd-real $@
+ chmod 640 /usr/home/$USER/passwd.cdb
+ chmod 710 /usr/home/$USER
+-sudo vmakegrpmail $USER
+-

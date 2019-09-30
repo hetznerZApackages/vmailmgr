@@ -1,0 +1,17 @@
+Source: vmailmgr
+Section: mail
+Priority: extra
+Maintainer: The Kernels <thekernels@hetzner.co.za>
+Build-Depends: debhelper (>= 8.9.7), autotools-dev, ghostscript, transfig, w3m, python, quilt (>= 0.40)
+Standards-Version: 3.7.3
+Homepage: http://untroubled.org/vmailmgr/
+
+Package: vmailmgr
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Conflicts: vmailmgr-ha
+Replaces: vmailmgr-ha
+Description: Simple virtualizing POP3 password interface
+ Vmailmgr provides a virtualizing password-checking interface to
+ qmail-pop3d as well as both a delivery agent to automatically delivery
+ mail within a virtual domain and a set of tools to manage such a domain.

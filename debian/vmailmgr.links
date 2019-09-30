@@ -1,0 +1,5 @@
+/usr/bin/vaddalias /usr/local/bin/vaddalias
+/usr/bin/vadduser /usr/local/bin/vadduser
+/usr/bin/vdeluser /usr/local/bin/vdeluser
+/usr/bin/vmakegrpmail /usr/local/bin/vmakegrpmail
+/usr/bin/vpasswd /usr/local/bin/vpasswd
