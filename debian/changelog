@@ -1,8 +1,8 @@
-vmailmgr (1:0.96.9+deb8hetz3~exp1) jessie-hetz-experimental; urgency=low
+vmailmgr (1:0.96.9+deb8hetz4~exp1) jessie-hetz-experimental; urgency=low
 
   * Remove vmakegrpmail from patches
 
- -- Geoff Robertson <gr@hetzner.co.za>  Mon, 30 Sep 2019 10:16:13 +0200
+ -- Geoff Robertson <gr@hetzner.co.za>  Mon, 30 Sep 2019 10:18:22 +0200
 
 vmailmgr (1:0.96.9-1+hetz2) jessie-hetz; urgency=low
 
