@@ -20,7 +20,7 @@ else
 CROSS= --build $(DEB_BUILD_GNU_TYPE)
 endif
 
-include /usr/share/dpatch/dpatch.make
+include /usr/share/quilt/quilt.make
 
 config.status: patch-stamp configure
 	dh_testdir
