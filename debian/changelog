@@ -1,3 +1,10 @@
+vmailmgr (1:0.97.1+deb9hetz5~exp1) stretch-hetz-experimental; urgency=low
+
+  *  Wrap all bin files in a wrapper to record what and who called it
+     First step to replacing vmailmgr
+
+ -- Shaun Bugler - Hetzner <sb@hetzner.co.za>  Tue, 11 Feb 2020 12:39:05 +0200
+
 vmailmgr (1:0.97.1+deb9hetz4) stretch-hetz; urgency=low
 
   * Released 1:0.97.1+deb9hetz4~exp3 as 1:0.97.1+deb9hetz4

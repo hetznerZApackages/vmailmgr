@@ -1,0 +1,10 @@
+#!/bin/sh
+
+if id $1;then
+  chgrp mail "/usr/home/$1"
+  chgrp mail "/usr/home/$1/passwd.cdb"
+else
+  echo "User not found on this server"
+  exit 1
+fi
+

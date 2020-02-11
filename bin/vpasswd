@@ -1,4 +1,14 @@
-#!/bin/sh
-vpasswd-real $@
-chmod 640 /usr/home/$USER/passwd.cdb
-chmod 710 /usr/home/$USER
+#!/usr/bin/env bash
+
+target_script='/usr/bin/vpasswd'
+original_script="${target_script}_original"
+
+args=$@
+ppid=$PPID
+cmdline=`cat /proc/$ppid/cmdline | tr "\0" ' '`
+user=`whoami`
+
+log="parent_id: \"${ppid}\" parent_cmdline: \"${cmdline}\" target: \"${target_script}\" user: \"${user}\""
+logger -t vmail_audit $log
+
+$original_script $args

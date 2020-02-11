@@ -1,37 +1,14 @@
-#! /usr/bin/python
-#-*-python-*-
-#
-# Copyright (C) 1999,2000 Bruce Guenter <bruceg@em.ca>
-#
-# This program is free software; you can redistribute it and/or modify
-# it under the terms of the GNU General Public License as published by
-# the Free Software Foundation; either version 2 of the License, or
-# (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+#!/usr/bin/env bash
 
-import vmailmgr
-import vmailmgr_cgi
+target_script='/usr/bin/vcommand'
+original_script="${target_script}_original"
 
-def main(form):
-    command = vmailmgr.Command(form.get('command'),
-                               form.fetch_args())
-    response = vmailmgr.Daemon().execute(command)
-    data = {
-        'command': command.name,
-        'response_code': response.code,
-        'response_msg': response.msg
-        }
-    for i in range(len(command.args)):
-        data['arg%d'%i] = command.args[i]
-    basename = form.get('filename', command.name)
-    vmailmgr_cgi.print_html(basename, data)
+args=$@
+ppid=$PPID
+cmdline=`cat /proc/$ppid/cmdline | tr "\0" ' '`
+user=`whoami`
 
-if __name__ == '__main__': vmailmgr_cgi.cgi_main(main)
+log="parent_id: \"${ppid}\" parent_cmdline: \"${cmdline}\" target: \"${target_script}\" user: \"${user}\""
+logger -t vmail_audit $log
+
+$original_script $args
