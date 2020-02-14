@@ -1,9 +1,15 @@
+vmailmgr (1:0.97.1+deb9hetz5~exp2) stretch-hetz-experimental; urgency=low
+
+  *  Revert all the previous changes
+
+ -- Shaun Bugler - Hetzner <sb@hetzner.co.za>  Fri, 14 Feb 2020 11:55:15 +0200
+
 vmailmgr (1:0.97.1+deb9hetz5~exp1) stretch-hetz-experimental; urgency=low
 
   *  Wrap all bin files in a wrapper to record what and who called it
      First step to replacing vmailmgr
 
- -- Shaun Bugler - Hetzner <sb@hetzner.co.za>  Tue, 11 Feb 2020 12:39:05 +0200
+ -- Shaun Bugler - Hetzner <sb@hetzner.co.za>  Fri, 14 Feb 2020 11:55:15 +0200
 
 vmailmgr (1:0.97.1+deb9hetz4) stretch-hetz; urgency=low
 
