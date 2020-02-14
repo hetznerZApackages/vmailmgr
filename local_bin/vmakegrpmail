@@ -1,14 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
-target_script='/usr/bin/vmakegrpmail'
-original_script="${target_script}_original"
+if id $1;then
+  chgrp mail "/usr/home/$1"
+  chgrp mail "/usr/home/$1/passwd.cdb"
+else
+  echo "User not found on this server"
+  exit 1
+fi
 
-args=$@
-ppid=$PPID
-cmdline=`cat /proc/$ppid/cmdline | tr "\0" ' '`
-user=`whoami`
-
-log="parent_id: \"${ppid}\" parent_cmdline: \"${cmdline}\" target: \"${target_script}\" user: \"${user}\""
-logger -t vmail_audit $log
-
-$original_script $args

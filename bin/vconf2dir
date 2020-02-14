@@ -1,14 +1,31 @@
-#!/usr/bin/env bash
+#!/bin/sh
+set -e
+if [ $# -ne 2 ]; then
+  echo Usage: vconf2dir configuration-file configuration-dir
+  exit 1
+fi
 
-target_script='/usr/bin/vconf2dir'
-original_script="${target_script}_original"
+sed -e '/^#/d' -e '/^ *$/d' -e '/=/!d' -e 's/ *= */ /' <"$1" | \
+{
+  if ! cd "$2"; then
+    echo vconf2dir: "$2" is not a directory.
+    exit 1
+  fi
+  while read n v; do
+    echo "$v" > $n
+  done
+}
 
-args=$@
-ppid=$PPID
-cmdline=`cat /proc/$ppid/cmdline | tr "\0" ' '`
-user=`whoami`
-
-log="parent_id: \"${ppid}\" parent_cmdline: \"${cmdline}\" target: \"${target_script}\" user: \"${user}\""
-logger -t vmail_audit $log
-
-$original_script $args
+cd "$2"
+# Post-process postmaster-aliases
+if [ -f postmaster-aliases ]; then
+  pa=`cat postmaster-aliases`
+  echo -n >postmaster-aliases
+  i=1
+  v=`echo $pa | cut -d, -f$i`
+  while [ -n "$v" ]; do
+    echo $v >>postmaster-aliases
+    i=`expr $i + 1`
+    v=`echo $pa | cut -d, -f$i`
+  done
+fi

@@ -1,4 +1,0 @@
-#!/bin/sh
-vpasswd-real $@
-chmod 640 /usr/home/$USER/passwd.cdb
-chmod 710 /usr/home/$USER
